@@ -1,0 +1,74 @@
+<!doctype html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+
+<title>FIFA LEAUGUE</title>
+
+<!-- <link rel="stylesheet" href="css/styles.css?v=1.0">-->
+  
+<link rel="shortcut icon" href="images/title_sc.jpg"/>
+<link rel="stylesheet" href="style.css">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+<style>
+
+.kluby {
+       color:white;
+	   text-align:center;
+}
+
+</style>
+  
+
+
+</head>
+
+<body>
+<header>
+<img src="images/logo.jpg" alt="logo">
+</header> 
+<nav>
+<div id="menu">
+<ul>
+<li><a href="index.htm">Home</a></li>
+<li><a href="clubs.html" style="background-color:purple;">Zoznam Klubov</a></li>
+<li><a href="hraci.html">Zoznam Hráčov</a></li>
+<li><a href="zapasy.htm">Zápasy</a></li> 
+<li><a href="tabulka.htm">Tabuľka</a></li>
+<li><a href="futbal.htm">Zo Sveta Futbalu</a></li>
+<li><a href="galeria.htm">Galéria</a></li>
+<li><a href="pravidla.htm">Pravidlá</a></li>
+</ul>
+</div>
+</nav>
+<main>
+<div class="kluby">
+                <h2>Číselník Klubov</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tím</th>
+                            <th>Krajina</th>
+                            <th>Dátum pridania</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="club :${clubs}">
+                        <td th:text="${club.name}"/>
+                        <td th:text="${club.country}"/>
+                        <td th:text="${#temporals.format(club.createdDate, 'dd/MM/yyyy')}"/>
+                    </tr>
+                </tbody></table>
+            </div>
+
+
+</main>
+<footer>
+<p><b>© Lukáš Šarocký - Študenský zápočtový projekt - Naposledy upravený 10.05.2021 - saroclu1@uhk.cz</b></p>
+</footer>
+  
+</body>
+</html>
+
