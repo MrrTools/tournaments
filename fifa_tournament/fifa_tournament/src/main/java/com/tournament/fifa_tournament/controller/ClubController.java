@@ -32,6 +32,12 @@ public class ClubController {
         return "redirect:/clubs";
     }
 
+    @GetMapping("/club/{clubID}")
+    public String deleteClub(@PathVariable("clubID") Long clubID){
+        clubService.deleteClub(clubID);
+        return "redirect:/clubs";
+    }
+
    /* @GetMapping("/update/${clubID}")
     public String editClub(@RequestParam("clubID") Long clubID,
                            @RequestParam("newName")   String name,

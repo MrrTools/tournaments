@@ -11,4 +11,6 @@ public interface ClubService {
     Club saveClub(Club club);
 
     ClubDTO findByClubID(long clubId);
+
+    void deleteClub(Long clubID);
 }

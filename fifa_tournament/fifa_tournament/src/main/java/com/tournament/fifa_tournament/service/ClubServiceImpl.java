@@ -27,6 +27,11 @@ public class ClubServiceImpl implements ClubService {
     }
 
     @Override
+    public void deleteClub(Long clubID) {
+        clubRepository.deleteById(clubID);
+    }
+
+    @Override
     public List<ClubDTO> findAllClubs() {
         List<Club> clubs = clubRepository.findAll();
         return clubs.stream().map(club -> mapToClubDTO(club)).collect(Collectors.toList());
