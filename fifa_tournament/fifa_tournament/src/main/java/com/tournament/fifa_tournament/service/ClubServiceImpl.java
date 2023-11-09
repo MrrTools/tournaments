@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 @Service
 public class ClubServiceImpl implements ClubService {
 
+
     private ClubRepository clubRepository;
 
     @Autowired //označenie závislostí, ktoré by mali byť automaticky vložené do beany (objektu)
@@ -20,9 +21,20 @@ public class ClubServiceImpl implements ClubService {
     }
 
     @Override
+    public ClubDTO findByClubID(long clubId) {
+        Club club = clubRepository.findById(clubId).get();
+        return mapToClubDTO(club);
+    }
+
+    @Override
     public List<ClubDTO> findAllClubs() {
         List<Club> clubs = clubRepository.findAll();
         return clubs.stream().map(club -> mapToClubDTO(club)).collect(Collectors.toList());
+    }
+
+    @Override
+    public Club saveClub(Club club) {
+        return clubRepository.save(club);
     }
 
     private ClubDTO mapToClubDTO(Club club){

@@ -6,11 +6,12 @@
 
 <title>FIFA LEAUGUE</title>
 
-<!-- <link rel="stylesheet" href="css/styles.css?v=1.0">-->
-  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/style.css">
 <link rel="shortcut icon" href="images/title_sc.jpg"/>
-<link rel="stylesheet" href="style.css">  
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<link rel="stylesheet" href="/style.css">
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 
@@ -18,6 +19,48 @@
        color:white;
 	   text-align:center;
 }
+
+body {font-family: Arial, Helvetica, sans-serif;}
+
+.modal {
+    display: none;
+    padding-top: 20%;
+}
+
+
+.close, .editClose {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;}
+
+#add, #myBtn {
+    align-items: center;
+    background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+    border: 0;
+    border-radius: 8px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    display: flex;
+    font-family: Phantomsans, sans-serif;
+    font-size: 20px;
+    justify-content: center;
+    line-height: 1em;
+    max-width: 100%;
+    min-width: 200px;
+    padding: 19px 24px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+#add, #myBtn:active,
+#add, #myBtn:hover {
+    outline: 0;}
 
 </style>
   
@@ -32,7 +75,7 @@
 <nav>
 <div id="menu">
 <ul>
-<li><a href="index.htm">Home</a></li>
+<li><a href="index.html">Home</a></li>
 <li><a href="clubs.html" style="background-color:purple;">Zoznam Klubov</a></li>
 <li><a href="hraci.html">Zoznam Hráčov</a></li>
 <li><a href="zapasy.htm">Zápasy</a></li> 
@@ -46,12 +89,14 @@
 <main>
 <div class="kluby">
                 <h2>Číselník Klubov</h2>
+    <button id="myBtn">Pridať klub</button>
                 <table>
                     <thead>
                         <tr>
                             <th>Tím</th>
                             <th>Krajina</th>
                             <th>Dátum pridania</th>
+                            <th>Edit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,16 +104,134 @@
                         <td th:text="${club.name}"/>
                         <td th:text="${club.country}"/>
                         <td th:text="${#temporals.format(club.createdDate, 'dd/MM/yyyy')}"/>
+                        <td><button class="editBtn">Editovať klub</button></td>
                     </tr>
                 </tbody></table>
             </div>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
 
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12">
+                            <div class="wrapper">
+                                <div class="row no-gutters">
 
+                                    <div class="col-lg-8 col-md-7 order-md-last d-flex align-items-stretch">
+                                        <div class="contact-wrap w-100 p-md-5 p-4">
+                                            <span class="close">&times;</span>
+                                            <h3 class="mb-4">Nový klub</h3>
+                                            <form method="POST" th:action="@{/clubs}" id="contactForm" name="contactForm" class="contactForm">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="label" for="name">Názov klubu</label>
+                                                            <input type="text" class="form-control" name="name" id="name" placeholder="Názov klubu">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="label" for="country">Krajina</label>
+                                                            <input type="text" class="form-control" name="country"  id="country" placeholder="Krajina">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <input type="submit" value="Pridať" id="add">
+                                                            <div class="submitting"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+
+    <!-- The edit Modal -->
+    <div id="editModal" class="modal">
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="wrapper">
+                        <div class="row no-gutters">
+
+                            <div class="col-lg-8 col-md-7 order-md-last d-flex align-items-stretch">
+                                <div class="contact-wrap w-100 p-md-5 p-4">
+                                    <span class="editClose">&times;</span>
+                                    <h3 class="mb-4">Editovať klub</h3>
+                                    <form method="PUT" th:action="@{/clubs}" id="editForm" name="contactForm" class="contactForm">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="label" for="name">Názov klubu</label>
+                                                    <input type="text" class="form-control" name="name" id="editName" placeholder="Názov klubu">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="label" for="country">Krajina</label>
+                                                    <input type="text" class="form-control" name="country"  id="editCountry" placeholder="Krajina">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input type="submit" value="Editovať" id="edit">
+                                                    <div class="submitting"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
 </main>
 <footer>
 <p><b>© Lukáš Šarocký - Študenský zápočtový projekt - Naposledy upravený 10.05.2021 - saroclu1@uhk.cz</b></p>
 </footer>
-  
+<script>
+    let modal = document.getElementById("myModal");
+    let btn = document.getElementById("myBtn");
+    let editBtn = document.querySelectorAll(".editBtn");
+    let editModal = document.getElementById("editModal");
+    let span = document.getElementsByClassName("close")[0];
+    let editSpan = document.getElementsByClassName("editClose")[0];
+    btn.onclick = function() {   modal.style.display = "block"; }
+    span.onclick = function() {   modal.style.display = "none"; }
+    editSpan.onclick = function() {   editModal.style.display = "none"; }
+
+    editBtn.forEach(function(btn) {
+        btn.onclick = function() {
+            let editModal = document.getElementById("editModal");
+            editModal.style.display = "block";
+        };
+    });
+
+
+
+window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+        else if (event.target == editModal) {
+            editModal.style.display = "none";
+        }
+    }
+</script>
 </body>
 </html>
 
