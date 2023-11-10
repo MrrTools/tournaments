@@ -12,4 +12,16 @@ public class MainController {
     public String index(){
         return "index";
     }
+    @GetMapping("/rules")
+    public String rules(){
+        return "rules";
+    }
+    @GetMapping("/galery")
+    public String galery(){
+        return "galery";
+    }
+    @GetMapping("/news")
+    public String news(){
+        return "news";
+    }
 }
