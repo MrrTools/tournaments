@@ -12,7 +12,7 @@ import java.util.List;
 
 @Controller
 public class ClubController {
-   private ClubService clubService;
+    private ClubService clubService;
 
     @Autowired //označenie závislostí, ktoré by mali byť automaticky vložené do beany (objektu)
     public ClubController(ClubService clubService) {
@@ -20,34 +20,30 @@ public class ClubController {
     }
 
     @GetMapping("/clubs")
-    public String listClubs(Model model){
+    public String listClubs(Model model) {
         List<ClubDTO> clubs = clubService.findAllClubs();
         model.addAttribute("clubs", clubs);
         return "clubs";
     }
 
     @PostMapping("/clubs")
-    public String saveClub(Club club){
+    public String saveClub(Club club) {
         clubService.saveClub(club);
         return "redirect:/clubs";
     }
 
-    @GetMapping("/club/{clubID}")
-    public String deleteClub(@PathVariable("clubID") Long clubID){
+    @GetMapping("/club/delete/{clubID}")
+    public String deleteClub(@PathVariable("clubID") Long clubID) {
         clubService.deleteClub(clubID);
         return "redirect:/clubs";
     }
 
-   /* @GetMapping("/update/${clubID}")
-    public String editClub(@RequestParam("clubID") Long clubID,
-                           @RequestParam("newName")   String name,
-                           @RequestParam("newCountry")   String country,
-    ){
-        Club club = new Club();
-        club.setName(name);
-        club.setCountry(country);
-        clubService.findByClubID(club);
-        return "redirect:/clubs"; */
+    @GetMapping("club/update/{clubID}")
+    public String editClub(@PathVariable("clubID") long clubID, Model model) {
+        ClubDTO club = clubService.findByClubID(clubID);
+        model.addAttribute( "club", club);
+        return "clubs";
     }
+}
 
 

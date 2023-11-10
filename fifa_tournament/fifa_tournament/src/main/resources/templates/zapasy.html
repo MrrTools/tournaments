@@ -31,9 +31,10 @@
 <nav>
     <div id="menu">
         <ul>
-            <li><a href="index.htm">Home</a></li>
+            <li><a href="#" th:href="@{/index}">Home</a></li>
+            <li><a href="#" th:href="@{/clubs}">Zoznam Klubov</a></li>
             <li><a href="hraci.htm">Zoznam Hráčov</a></li>
-            <li><a href="zapasy.html" style="background-color:purple;">Zápasy</a></li>
+            <li><a href="#" th:href="@{/zapasy}" style="background-color:purple;">Zápasy</a></li>
             <li><a href="tabulka.htm">Tabuľka</a></li>
             <li><a href="futbal.htm">Zo Sveta Futbalu</a></li>
             <li><a href="galeria.htm">Galéria</a></li>
@@ -44,6 +45,7 @@
 <main>
     <div class="zapasy">
         <b><h2>Zápasy</h2></b>
+        <td><button type="button" th:onclick="|window.location.href='/zapasy'|">TEST</button></td>
         <table>
             <tbody>
             <tr>

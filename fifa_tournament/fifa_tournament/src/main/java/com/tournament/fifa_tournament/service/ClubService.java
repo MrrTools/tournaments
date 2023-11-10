@@ -10,7 +10,7 @@ public interface ClubService {
 
     Club saveClub(Club club);
 
-    ClubDTO findByClubID(long clubId);
+    ClubDTO findByClubID(long clubID);
 
     void deleteClub(Long clubID);
 }
