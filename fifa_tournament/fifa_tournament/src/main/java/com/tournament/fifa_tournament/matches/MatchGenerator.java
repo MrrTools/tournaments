@@ -42,6 +42,14 @@ public class MatchGenerator {
 
                 matchService.saveMatch(match);
 
+                //odvetne zapasy sucasne zapisane do DB v tabulke order by round
+                match = new Match();
+                match.setHome(awayTeam);
+                match.setAway(homeTeam);
+                match.setRound(numberOfTeams - 1 + i);
+
+                matchService.saveMatch(match);
+
             }
 
             teams.add(1, teams.remove(teams.size() - 1));
