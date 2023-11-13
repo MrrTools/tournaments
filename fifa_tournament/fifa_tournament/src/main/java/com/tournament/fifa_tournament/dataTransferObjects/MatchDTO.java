@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Data // nahradza gettry, settry, konstruktory atd
 @Builder // pre vytvorenie objektov
 public class MatchDTO {
-    private String round;
+    private Integer round;
     private Integer matchID;
     private String home;
     private String result;

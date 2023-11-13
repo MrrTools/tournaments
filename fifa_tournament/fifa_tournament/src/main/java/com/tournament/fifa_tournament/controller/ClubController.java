@@ -44,6 +44,7 @@ public class ClubController {
         model.addAttribute( "club", club);
         return "clubs";
     }
+
 }
 
 

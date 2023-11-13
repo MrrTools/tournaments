@@ -1,54 +1,50 @@
 package com.tournament.fifa_tournament.matches;
 
-
+import com.tournament.fifa_tournament.models.Match;
 import com.tournament.fifa_tournament.service.MatchService;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class MatchGenerator {
-
-    private int numberOfTeams;
+    
     private MatchService matchService;
 
-    public MatchGenerator(int numberOfTeams) {
-        this.numberOfTeams = numberOfTeams;
+    public MatchGenerator(MatchService matchService) {
+        this.matchService = matchService;
     }
 
-    public List<String> generateRoundRobinTournament() {
-        List<String> matches = new ArrayList<>();
-        List<String> teams = new ArrayList<>();
+    public void generateMatches() {
 
-        // Naplňte seznam týmů názvy nebo identifikátory
+        List<String> teams = new ArrayList<>();
+        int numberOfTeams = 8;
         for (int i = 1; i <= numberOfTeams; i++) {
             teams.add("Team " + i);
         }
 
-        // Algoritmus turnaje Round Robin s odvety
-        for (int i = 0; i < numberOfTeams - 1; i++) {
-            matches.add("\nRound " + (i + 1) + ":");
-
-            for (int j = 0; j < numberOfTeams / 2; j++) {
-                String team1 = teams.get(j);
-                String team2 = teams.get(numberOfTeams - 1 - j);
-
-                if (j % 2 == 1 || i % 2 == 1) {
-                    matches.add(team2 + " vs. " + team1);
-                    //matchService.saveMatch();
-                } else {
-                    matches.add(team1 + " vs. " + team2);
-                }
-            }
-
-            // Rotace týmů
-            teams.add(1, teams.remove(teams.size() - 1));
+        if (numberOfTeams % 2 != 0) {
+            teams.add("BYE");
+            numberOfTeams++;
         }
 
-        return matches;
+        for (int i = 1; i <= numberOfTeams - 1; i++) {
+            for (int j = 0; j < numberOfTeams / 2; j++) {
+
+                String homeTeam = teams.get(j);
+                String awayTeam = teams.get(numberOfTeams - 1 - j);
+
+                Match match = new Match();
+                match.setHome(homeTeam);
+                match.setAway(awayTeam);
+                match.setRound(i);
+
+                matchService.saveMatch(match);
+
+            }
+
+            teams.add(1, teams.remove(teams.size() - 1));
+        }
     }
 }
-
-
-
-
-

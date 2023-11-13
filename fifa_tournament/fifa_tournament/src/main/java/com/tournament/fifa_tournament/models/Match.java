@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "matches", schema = "tournaments")
 public class Match {
-    private String round;
+    private Integer round;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer matchID;

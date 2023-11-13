@@ -106,7 +106,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                         <td th:text="${club.country}"/>
                         <td th:text="${#temporals.format(club.createdDate, 'dd/MM/yyyy')}"/>
                         <td><a class="editBtn">Editovať klub</a></td>
-                        <td><a class="editBtn" href="#" data-toggle="modal" data-target="#editModal" th:attr="data-id=${club.clubID}">Edit</a></td>
+                        <td><a class="editBtn">Edit</a></td>
                         <td><a th:href="@{'/club/delete/' + ${club.clubID}}">Zmazať</a></td>
                     </tr>
                 </tbody></table>
@@ -223,6 +223,10 @@ body {font-family: Arial, Helvetica, sans-serif;}
             editModal.style.display = "block";
         };
     });
+
+    $('document').ready(function (){
+        $('.table .btn')
+    })
 
 
 
