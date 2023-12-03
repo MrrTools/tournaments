@@ -39,5 +39,4 @@ public class LeagueTablelmpl implements LeagueTableService {
         return leagueTableDTO;
     }
 
-
 }

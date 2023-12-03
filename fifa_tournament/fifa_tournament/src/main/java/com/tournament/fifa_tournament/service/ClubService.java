@@ -4,6 +4,7 @@ import com.tournament.fifa_tournament.dataTransferObjects.ClubDTO;
 import com.tournament.fifa_tournament.models.Club;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ClubService {
     List<ClubDTO> findAllClubs();
@@ -11,6 +12,8 @@ public interface ClubService {
     Club saveClub(Club club);
 
     ClubDTO findByClubID(long clubID);
+
+    ClubDTO findByName(String name);
 
     void deleteClub(Long clubID);
 }

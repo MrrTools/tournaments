@@ -2,7 +2,9 @@ package com.tournament.fifa_tournament.controller;
 
 import com.tournament.fifa_tournament.dataTransferObjects.MatchDTO;
 import com.tournament.fifa_tournament.matches.MatchGenerator;
+import com.tournament.fifa_tournament.matches.Recomputation;
 import com.tournament.fifa_tournament.models.Match;
+import com.tournament.fifa_tournament.service.ClubService;
 import com.tournament.fifa_tournament.service.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,11 +19,13 @@ public class MatchesController {
 
     private final MatchService matchService;
     private final MatchGenerator matchGenerator;
+    private final Recomputation recomputation;
 
     @Autowired
-    public MatchesController(MatchService matchService, MatchGenerator matchGenerator) {
+    public MatchesController(MatchService matchService, MatchGenerator matchGenerator, Recomputation recomputation) {
         this.matchService = matchService;
         this.matchGenerator = matchGenerator;
+        this.recomputation = recomputation;
     }
 
     @PostMapping("/generate")
@@ -46,6 +50,7 @@ public class MatchesController {
         match.setRound(matchService.findByMatchID(match.getMatchID()).getRound());
         match.setCreatedDate(matchService.findByMatchID(match.getMatchID()).getCreatedDate());
         matchService.saveMatch(match);
+        recomputation.tableRecomputation(match);
         return "redirect:/zapasy";
     }
 

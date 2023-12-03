@@ -30,7 +30,7 @@ public class MatchGenerator {
         for (PlayerDTO playerDTO : allPlayers) {
             teams.add(playerDTO.getClub().getName());
         }
-        
+
         if (numberOfTeams % 2 != 0) {
             teams.add("BYE");
             numberOfTeams++;
