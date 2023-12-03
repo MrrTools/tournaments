@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -16,24 +17,21 @@ import java.util.Set;
 @AllArgsConstructor // konstruktor s atributmi
 @NoArgsConstructor  // konstruktory bez atributov
 @Entity
-@Table(name = "clubs", schema = "tournaments")
-public class Club {
+@Table(name = "league_table", schema = "tournaments")
+public class LeagueTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer clubID;
-    private String name;
-    private String country;
+    private Integer rowID;
+    private String goals;
+    private Integer points;
     @CreationTimestamp
     private LocalDateTime createdDate;
+    @UpdateTimestamp
+    private LocalDateTime updatedDate;
 
 
-
-    @OneToOne(mappedBy = "club", cascade = CascadeType.ALL)
-    private LeagueTable leagueTable;
-
-    @OneToMany(mappedBy = "club", cascade = CascadeType.REMOVE)
-    private Set<Player> players = new HashSet<>();
+    @OneToOne
+    @JoinColumn(name = "clubID", nullable = false)
+    private Club club;
 
 }
-
-

@@ -1,8 +1,8 @@
 package com.tournament.fifa_tournament.controller;
 
-import com.tournament.fifa_tournament.dataTransferObjects.ClubDTO;
 import com.tournament.fifa_tournament.dataTransferObjects.MatchDTO;
 import com.tournament.fifa_tournament.matches.MatchGenerator;
+import com.tournament.fifa_tournament.models.Match;
 import com.tournament.fifa_tournament.service.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +35,18 @@ public class MatchesController {
         List<MatchDTO> matches = matchService.findAllMatches();
         model.addAttribute("matches", matches);
         return "zapasy";
+    }
+
+    @PostMapping( "/update")
+    public String editMatch(Match match) {
+
+        //nefunguje @JsonInclude(JsonInclude.Include.NON_NULL), neviem spravne pouzit ?
+        match.setHome(matchService.findByMatchID(match.getMatchID()).getHome());
+        match.setAway(matchService.findByMatchID(match.getMatchID()).getAway());
+        match.setRound(matchService.findByMatchID(match.getMatchID()).getRound());
+        match.setCreatedDate(matchService.findByMatchID(match.getMatchID()).getCreatedDate());
+        matchService.saveMatch(match);
+        return "redirect:/zapasy";
     }
 
 }

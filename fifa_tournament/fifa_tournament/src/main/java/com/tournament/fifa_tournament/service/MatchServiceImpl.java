@@ -37,8 +37,15 @@ public class MatchServiceImpl implements MatchService {
                 .home(match.getHome())
                 .result(match.getResult())
                 .away(match.getAway())
+                .createdDate(match.getCreatedDate())
                 .build();
         return matchDTO;
+    }
+
+    @Override
+    public MatchDTO findByMatchID(int matchID) {
+        Match match = matchRepository.findById(matchID).get();
+        return mapToMatchDTO(match);
     }
 
 

@@ -18,6 +18,7 @@ public class MatchGenerator {
 
     public void generateMatches() {
 
+
         List<String> teams = new ArrayList<>();
         int numberOfTeams = 8;
         for (int i = 1; i <= numberOfTeams; i++) {

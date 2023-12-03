@@ -77,9 +77,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <ul>
     <li><a href="#" th:href="@{/index}">Home</a></li>
     <li><a href="#" th:href="@{/clubs}" style="background-color:purple;">Zoznam Klubov</a></li>
-    <li><a href="hraci.html">Zoznam Hráčov</a></li>
+    <li><a href="#" th:href="@{/players}">Zoznam Hráčov</a></li>
     <li><a href="#" th:href="@{/zapasy}">Zápasy</a></li>
-    <li><a href="tabulka.htm">Tabuľka</a></li>
+    <li><a href="#" th:href="@{/table}">Tabuľka</a></li>
     <li><a href="#" th:href="@{/news}">Zo Sveta Futbalu</a></li>
     <li><a href="#" th:href="@{/galery}">Galéria</a></li>
     <li><a href="#" th:href="@{/rules}">Pravidlá</a></li>
@@ -106,7 +106,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
                         <td th:text="${club.country}"/>
                         <td th:text="${#temporals.format(club.createdDate, 'dd/MM/yyyy')}"/>
                         <td><a class="editBtn">Editovať klub</a></td>
-                        <td><a class="editBtn">Edit</a></td>
                         <td><a th:href="@{'/club/delete/' + ${club.clubID}}">Zmazať</a></td>
                     </tr>
                 </tbody></table>

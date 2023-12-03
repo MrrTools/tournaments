@@ -7,21 +7,33 @@
     <title>FIFA LEAUGUE</title>
 
     <!-- <link rel="stylesheet" href="css/styles.css?v=1.0">-->
-
-    <link rel="shortcut icon" href="/images/title_sc.jpg"/>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="images/title_sc.jpg"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script th:if="${existRoll != null}">
+        $(function () {
+            $('#myModal').modal('show');
+        });
+    </script>
     <style>
 
         .zapasy {
-            color:white;
-            text-align:center;
+            color: white;
+            text-align: center;
         }
 
-         #myBtn {
+        form {
+            display: flex;
+        }
+
+        #myBtn {
             align-items: center;
-            background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+            background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
             border: 0;
             border-radius: 8px;
             box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
@@ -41,12 +53,13 @@
             touch-action: manipulation;
             white-space: nowrap;
             cursor: pointer;
+            margin-left: 10px;
         }
 
-            #myBtn:active,
-            #myBtn:hover {
-            outline: 0;}
-
+        #myBtn:active,
+        #myBtn:hover {
+            outline: 0;
+        }
 
     </style>
 
@@ -62,9 +75,9 @@
         <ul>
             <li><a href="#" th:href="@{/index}">Home</a></li>
             <li><a href="#" th:href="@{/clubs}">Zoznam Klubov</a></li>
-            <li><a href="hraci.htm">Zoznam Hráčov</a></li>
+            <li><a href="#" th:href="@{/players}">Zoznam Hráčov</a></li>
             <li><a href="#" th:href="@{/zapasy}" style="background-color:purple;">Zápasy</a></li>
-            <li><a href="tabulka.htm">Tabuľka</a></li>
+            <li><a href="#" th:href="@{/table}">Tabuľka</a></li>
             <li><a href="#" th:href="@{/news}">Zo Sveta Futbalu</a></li>
             <li><a href="#" th:href="@{/galery}">Galéria</a></li>
             <li><a href="#" th:href="@{/rules}">Pravidlá</a></li>
@@ -84,6 +97,7 @@
                 <th>Domáci</th>
                 <th>Výsledok</th>
                 <th>Hostia</th>
+                <th>Pridať výsledok</th>
             </tr>
             </thead>
             <tbody>
@@ -92,14 +106,135 @@
                 <td th:text="${match.home}"/>
                 <td th:text="${match.result}"/>
                 <td th:text="${match.away}"/>
-            </tr>
-            </tbody></table>
+                <td>
+                    <a href="#" data-toggle="modal" data-target="#myModal"
+                            th:attrappend="data-target=${match.matchID}">Edit
+                    </a>
+
+
+                    <!-- The edit Modal -->
+                    <div class="modal fade" id="myModal" role="dialog" th:attrappend="id=${match.matchID}">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-12">
+                                            <div class="wrapper">
+                                                <div class="row no-gutters">
+
+                                                    <div class="col-lg-8 col-md-7 order-md-last d-flex align-items-stretch">
+                                                        <div class="contact-wrap w-100 p-md-5 p-4">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                                    <!--Form code start from here  -->
+
+
+                                    <!-- Form Name -->
+                                    <legend>Pridať výsledok</legend>
+
+                                    <form class="form-horizontal" th:action="@{/update}"
+                                          method="POST">
+                                        <div class="row">
+
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+
+                                                    <input id="matchID" path="matchID" name="matchID" type="hidden"
+                                                           placeholder="id" class="form-control input-md"
+                                                           th:value="${match.matchID}"/>
+                                                </div>
+                                            </div>
+
+
+                                            <!-- Text input-->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="result">Výsledok</label>
+                                                <div class="col-md-4">
+                                                    <input id="result" path="result" name="result"
+                                                           type="text" placeholder="Výsledok"
+                                                           class="form-control input-md" th:value="${match.result}"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <!-- Button -->
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input type="submit" value="Pridať" id="add">
+                                                    <div class="submitting"></div>
+                                                </div>
+
+                                        <div/>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
     </div>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- The Modal -->
+    <div>
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="wrapper">
+                        <div class="row no-gutters">
+
+                            <div class="col-lg-8 col-md-7 order-md-last d-flex align-items-stretch">
+                                <div class="contact-wrap w-100 p-md-5 p-4">
+                                    <span class="close">&times;</span>
+                                    <h3 class="mb-4">Nový klub</h3>
+                                    <form method="POST" th:action="@{/clubs}" id="contactForm" name="contactForm" class="contactForm">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="label" for="name">Názov klubu</label>
+                                                    <input type="text" class="form-control" name="name" id="name" placeholder="Názov klubu">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="label" for="country">Krajina</label>
+                                                    <input type="text" class="form-control" name="country"  id="country" placeholder="Krajina">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input type="submit" value="Pridať" id="add">
+                                                    <div class="submitting"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+
 </main>
 <footer>
     <p><b>© Lukáš Šarocký - Študenský zápočtový projekt - Naposledy upravený 10.05.2021 - saroclu1@uhk.cz</b></p>
 </footer>
-
 </body>
 </html>
 

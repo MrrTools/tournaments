@@ -1,0 +1,110 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>FIFA LEAUGUE</title>
+
+    <!-- <link rel="stylesheet" href="css/styles.css?v=1.0">-->
+
+    <link rel="shortcut icon" href="/images/title_sc.jpg"/>
+    <link rel="stylesheet" href="/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+
+        .hraci {
+            color:white;
+            text-align:center;
+        }
+
+        #myBtn {
+            align-items: center;
+            background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+            border: 0;
+            border-radius: 8px;
+            box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            display: flex;
+            font-family: Phantomsans, sans-serif;
+            font-size: 20px;
+            justify-content: center;
+            line-height: 1em;
+            max-width: 100%;
+            min-width: 200px;
+            padding: 19px 24px;
+            text-decoration: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        #myBtn:active,
+        #myBtn:hover {
+            outline: 0;}
+
+
+    </style>
+
+
+
+</head>
+
+<body>
+<header>
+    <img src="images/logo.jpg" alt="logo">
+</header>
+<nav>
+    <div id="menu">
+        <ul>
+            <li><a href="#" th:href="@{/index}">Home</a></li>
+            <li><a href="#" th:href="@{/clubs}">Zoznam Klubov</a></li>
+            <li><a href="#" th:href="@{/players}" style="background-color:purple;">Zoznam Hráčov</a></li>
+            <li><a href="#" th:href="@{/zapasy}">Zápasy</a></li>
+            <li><a href="#" th:href="@{/table}">Tabuľka</a></li>
+            <li><a href="#" th:href="@{/news}">Zo Sveta Futbalu</a></li>
+            <li><a href="#" th:href="@{/galery}">Galéria</a></li>
+            <li><a href="#" th:href="@{/rules}">Pravidlá</a></li>
+        </ul>
+    </div>
+</nav>
+<main>
+    <div class="hraci">
+        <h2>Zoznam Hráčov</h2>
+        <button id="myBtn">Pridať Hráča</button>
+        <table>
+            <thead>
+            <tr>
+                <th>Meno</th>
+                <th>Priezvysko</th>
+                <th>Tím</th>
+                <th>Prvá Sezóna</th>
+                <th>Počet Trofejí</th>
+                <th>Zmazať hráča</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="player :${players}">
+                <td th:text="${player.name}"/>
+                <td th:text="${player.surname}"/>
+                <td th:text="${player?.club?.name}"/>
+                <td th:text="${player.first_season}"/>
+                <td th:text="${player.trophies_number}"/>
+                <td><a th:href="@{'/players/delete/' + ${player.playerID}}">Zmazať</a></td>
+            </tr>
+            </tbody></table>
+    </div>
+
+
+</main>
+<footer>
+    <p><b>© Lukáš Šarocký - Študenský zápočtový projekt - Naposledy upravený 10.05.2021 - saroclu1@uhk.cz</b></p>
+</footer>
+
+</body>
+</html>
+
