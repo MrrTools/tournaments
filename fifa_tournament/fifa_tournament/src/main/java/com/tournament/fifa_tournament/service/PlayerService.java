@@ -8,4 +8,6 @@ public interface PlayerService {
     List<PlayerDTO> findAllPlayers();
 
     void deletePlayer(Integer playerID);
+
+    int countPlayers();
 }

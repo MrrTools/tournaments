@@ -43,4 +43,9 @@ public class PlayerServicelmpl implements PlayerService{
     public void deletePlayer(Integer playerID) {
         playerRepository.deleteById(playerID);
     }
+
+    public int countPlayers() {
+        return (int) playerRepository.count();
+    }
+
 }

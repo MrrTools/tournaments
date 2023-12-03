@@ -1,7 +1,9 @@
 package com.tournament.fifa_tournament.matches;
 
+import com.tournament.fifa_tournament.dataTransferObjects.PlayerDTO;
 import com.tournament.fifa_tournament.models.Match;
 import com.tournament.fifa_tournament.service.MatchService;
+import com.tournament.fifa_tournament.service.PlayerService;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,20 +13,24 @@ import java.util.List;
 public class MatchGenerator {
     
     private MatchService matchService;
+    private PlayerService playerService;
 
-    public MatchGenerator(MatchService matchService) {
+    public MatchGenerator(MatchService matchService, PlayerService playerService) {
         this.matchService = matchService;
+        this.playerService = playerService;
     }
 
     public void generateMatches() {
 
 
         List<String> teams = new ArrayList<>();
-        int numberOfTeams = 8;
-        for (int i = 1; i <= numberOfTeams; i++) {
-            teams.add("Team " + i);
-        }
+        List<PlayerDTO> allPlayers = playerService.findAllPlayers();
+        int numberOfTeams = playerService.countPlayers();
 
+        for (PlayerDTO playerDTO : allPlayers) {
+            teams.add(playerDTO.getClub().getName());
+        }
+        
         if (numberOfTeams % 2 != 0) {
             teams.add("BYE");
             numberOfTeams++;
