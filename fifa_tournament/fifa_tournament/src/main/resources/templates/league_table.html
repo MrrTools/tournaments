@@ -61,8 +61,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="league :${rows}">
-                    <td th:text="${league.rowID}"/>
+                <tr th:each="league, count :${rows}">
+                    <td th:text="${count.count}"/>
                     <td th:text="${league?.club?.name}"/>
                     <td th:text="${league.goals}"/>
                     <td th:text="${league.points}"/>
