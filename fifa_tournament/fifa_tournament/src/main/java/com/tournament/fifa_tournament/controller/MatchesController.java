@@ -4,7 +4,6 @@ import com.tournament.fifa_tournament.dataTransferObjects.MatchDTO;
 import com.tournament.fifa_tournament.matches.MatchGenerator;
 import com.tournament.fifa_tournament.matches.Recomputation;
 import com.tournament.fifa_tournament.models.Match;
-import com.tournament.fifa_tournament.service.ClubService;
 import com.tournament.fifa_tournament.service.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

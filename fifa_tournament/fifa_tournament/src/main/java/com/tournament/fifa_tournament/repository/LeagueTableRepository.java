@@ -9,4 +9,6 @@ public interface LeagueTableRepository extends JpaRepository<LeagueTable, Intege
 
     Optional<LeagueTable> findByRowID(Integer rowID);
 
+    Optional<LeagueTable> findByClubClubID(Integer clubID);
+
 }
