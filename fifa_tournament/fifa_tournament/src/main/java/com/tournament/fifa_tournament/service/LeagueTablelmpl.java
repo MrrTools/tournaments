@@ -8,8 +8,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import java.util.Comparator;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,7 +30,9 @@ public class LeagueTablelmpl implements LeagueTableService {
 
     @Override
     public List<LeagueTableDTO> findAllRows() {
-        List<LeagueTable> leagueTables = leagueTableRepo.findAll(Sort.by("points").descending());
+        //List<LeagueTable> leagueTables = leagueTableRepo.findAll(Sort.by("points").descending());
+        List<LeagueTable> leagueTables = leagueTableRepo.findAll();
+        leagueTables.sort(new LeagueTableComparator());
         return leagueTables.stream().map(leagueTable -> mapToLeagueTableDTO(leagueTable)).collect(Collectors.toList());
     }
 
@@ -59,6 +61,35 @@ public class LeagueTablelmpl implements LeagueTableService {
                 .setParameter("points", leagueTable.getPoints())
                 .setParameter("rowID", leagueTable.getRowID())
                 .executeUpdate();
+    }
+
+    private class LeagueTableComparator implements Comparator<LeagueTable> {
+        @Override
+        public int compare(LeagueTable team1, LeagueTable team2) {
+            // Porovnaj bodové rozdiely
+            // Vysledok porovnania -1 prve cislo mensia 0 rovne 1 prve cislo vacsie
+            int pointsComparison = Integer.compare(team2.getPoints(), team1.getPoints());
+
+            // Ak majú rovnaké body, porovnaj skóre
+            if (pointsComparison == 0) {
+                return compareScores(team1, team2);
+            }
+
+            return pointsComparison;
+        }
+
+        private int compareScores(LeagueTable team1, LeagueTable team2) {
+            // porovnávanie skóre
+            String[] score1Parts = team1.getGoals().split(":");
+            String[] score2Parts = team2.getGoals().split(":");
+
+            int goals1 = Integer.parseInt(score1Parts[0]);
+            int goals2 = Integer.parseInt(score2Parts[0]);
+
+            int difference = goals2 - goals1;
+
+            return Integer.compare(difference, 0);
+        }
     }
 
 }
