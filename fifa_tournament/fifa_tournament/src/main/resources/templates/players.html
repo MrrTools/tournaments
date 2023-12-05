@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -7,10 +6,13 @@
     <title>FIFA LEAUGUE</title>
 
     <!-- <link rel="stylesheet" href="css/styles.css?v=1.0">-->
-
+    <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="/images/title_sc.jpg"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <style>
 
@@ -19,7 +21,7 @@
             text-align:center;
         }
 
-        #myBtn {
+        #add, #myBtn {
             align-items: center;
             background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
             border: 0;
@@ -43,15 +45,19 @@
             cursor: pointer;
         }
 
-        #myBtn:active,
-        #myBtn:hover {
+        #add, #myBtn:active,
+        #add, #myBtn:hover {
             outline: 0;}
 
 
     </style>
 
 
-
+    <script th:if="${existRoll != null}">
+        $(function () {
+            $('#editModal').modal('show');
+        });
+    </script>
 </head>
 
 <body>
@@ -75,7 +81,7 @@
 <main>
     <div class="hraci">
         <h2>Zoznam Hráčov</h2>
-        <button id="myBtn">Pridať Hráča</button>
+        <a type="button" id="myBtn" data-toggle="modal" data-target="#myModal">Pridať Hráča</a>
         <table>
             <thead>
             <tr>
@@ -84,7 +90,9 @@
                 <th>Tím</th>
                 <th>Prvá Sezóna</th>
                 <th>Počet Trofejí</th>
+                <th>Dátum pridania</th>
                 <th>Zmazať hráča</th>
+                <th>Editovať hráča</th>
             </tr>
             </thead>
             <tbody>
@@ -94,9 +102,200 @@
                 <td th:text="${player?.club?.name}"/>
                 <td th:text="${player.first_season}"/>
                 <td th:text="${player.trophies_number}"/>
+                <td th:text="${#temporals.format(player.createdDate, 'dd/MM/yyyy')}"/>
                 <td><a th:href="@{'/players/delete/' + ${player.playerID}}">Zmazať</a></td>
-            </tr>
+                <td><a href="#" data-toggle="modal" data-target="#editModal"
+                       th:attrappend="data-target=${player.playerID}">Edit
+                    </a>
+                    <!-- The edit Modal -->
+                    <div class="modal fade" id="editModal" role="dialog" th:attrappend="id=${player.playerID}">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-12">
+                                            <div class="wrapper">
+                                                <div class="row no-gutters">
+
+                                                    <div class="col-lg-8 col-md-7 order-md-last d-flex align-items-stretch">
+                                                        <div class="contact-wrap w-100 p-md-5 p-4">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                                                            <!--Form code start from here  -->
+
+
+                                                            <!-- Form Name -->
+                                                            <legend>Hráč</legend>
+
+                                                            <form method="POST" th:action="@{/players}" id="contactForm" name="contactForm" class="contactForm">
+
+                                                                <input id="playerID" path="playerID" name="playerID" type="hidden"
+                                                                       placeholder="id" class="form-control input-md"
+                                                                       th:value="${player.playerID}"/>
+                                                                <input id="createdDate" path="createdDate" name="createdDate" type="hidden"
+                                                                       placeholder="id" class="form-control input-md"
+                                                                       th:value="${player.createdDate}"/>
+
+
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label class="label" for="name">Meno</label>
+                                                                            <input type="text" name="name" id="name" path="name" placeholder="Meno"
+                                                                                   class="form-control input-md" th:value="${player.name}"
+                                                                            >
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label class="label" for="surname">Priezvysko</label>
+                                                                            <input type="text" name="surname"  id="surname" path="surname" placeholder="Priezvysko"
+                                                                                   class="form-control input-md" th:value="${player.surname}">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label class="label" for="first_season">Prvá sezóna</label>
+                                                                            <input type="text" name="first_season" id="first_season" path="first_season" placeholder="Prvá sezóna"
+                                                                                   class="form-control input-md" th:value="${player.first_season}"
+                                                                            >
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label class="label" for="trophies_number">Počet trofejí</label>
+                                                                            <input type="text" name="trophies_number"  id="trophies_number" path="trophies_number" placeholder="Počet trofejí"
+                                                                                   class="form-control input-md" th:value="${player.trophies_number}">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label class="label" for="clubID">Klub</label>
+                                                                                <select name="clubID" id="clubID" path="clubID" class="form-control input-md">
+                                                                                    <option value="" disabled>Vyberte klub</option>
+                                                                                    <option th:each="club : ${clubs}" th:value="${club.clubID}" th:text="${club.name}" th:selected="${player.getClub().name}"></option>
+                                                                                </select>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <input type="submit" value="Uložiť" id="add">
+                                                                            <div class="submitting"></div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                            </form>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    </div>            </tr>
             </tbody></table>
+    </div>
+
+    <!-- The edit Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12">
+                            <div class="wrapper">
+                                <div class="row no-gutters">
+
+                                    <div class="col-lg-8 col-md-7 order-md-last d-flex align-items-stretch">
+                                        <div class="contact-wrap w-100 p-md-5 p-4">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                                            <!--Form code start from here  -->
+
+
+                                            <!-- Form Name -->
+                                            <legend>Hráč</legend>
+
+                                            <form method="POST" th:action="@{/players}" id="contactForm" name="contactForm" class="contactForm">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="label" for="name">Meno</label>
+                                                            <input type="text" name="name" id="name" path="name" placeholder="Meno"
+
+                                                            >
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="label" for="surname">Priezvysko</label>
+                                                            <input type="text" name="surname"  id="surname" path="surname" placeholder="Priezvysko"
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="label" for="first_season">Prvá sezóna</label>
+                                                            <input type="text" name="first_season" id="first_season" path="first_season" placeholder="Prvá sezóna"
+
+                                                            >
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="label" for="trophies_number">Počet trofejí</label>
+                                                            <input type="text" name="trophies_number"  id="trophies_number" path="trophies_number" placeholder="Počet trofejí"
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="label" for="clubID">Klub</label>
+                                                                <select name="clubID" id="clubID" path="clubID" class="form-control input-md">
+                                                                    <option value="" disabled>Vyberte klub</option>
+                                                                    <option th:each="club : ${clubs}" th:value="${club.clubID}" th:text="${club.name}"></option>
+                                                                </select>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <input type="submit" value="Uložiť" id="add">
+                                                            <div class="submitting"></div>
+                                                        </div>
+                                                    </div>
+
+
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 
 
@@ -104,7 +303,39 @@
 <footer>
     <p><b>© Lukáš Šarocký - Študenský zápočtový projekt - Naposledy upravený 10.05.2021 - saroclu1@uhk.cz</b></p>
 </footer>
+<script>
+    let modal = document.getElementById("myModal");
+    let btn = document.getElementById("myBtn");
+    let editBtn = document.querySelectorAll(".editBtn");
+    let editModal = document.getElementById("editModal");
+    let span = document.getElementsByClassName("close")[0];
+    let editSpan = document.getElementsByClassName("editClose")[0];
+    btn.onclick = function() {   modal.style.display = "block"; }
+    span.onclick = function() {   modal.style.display = "none"; }
+    editSpan.onclick = function() {   editModal.style.display = "none"; }
 
+    editBtn.forEach(function(btn) {
+        btn.onclick = function() {
+            let editModal = document.getElementById("editModal");
+            editModal.style.display = "block";
+        };
+    });
+
+    $('document').ready(function (){
+        $('.table .btn')
+    })
+
+
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+        else if (event.target == editModal) {
+            editModal.style.display = "none";
+        }
+    }
+</script>
 </body>
 </html>
 

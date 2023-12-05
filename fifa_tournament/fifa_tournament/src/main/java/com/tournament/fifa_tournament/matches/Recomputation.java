@@ -63,12 +63,12 @@ public class Recomputation {
         leagueTable.setPoints(homeClubPoints);
         leagueTable.setGoals(newScore);
         leagueTable.setRowID(leagueTableService.findByClubClubID(clubService.findByName(match.getHome()).getClubID()).getRowID());
-        leagueTableService.saveTable(leagueTable);
+        leagueTableService.updateTable(leagueTable);
 
         leagueTable.setPoints(awayClubPoints);
         leagueTable.setGoals(newScore2);
         leagueTable.setRowID(leagueTableService.findByClubClubID(clubService.findByName(match.getAway()).getClubID()).getRowID());
-        leagueTableService.saveTable(leagueTable);
+        leagueTableService.updateTable(leagueTable);
 
     }
 

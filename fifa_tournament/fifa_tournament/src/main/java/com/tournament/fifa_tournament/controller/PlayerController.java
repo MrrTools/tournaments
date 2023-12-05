@@ -1,28 +1,38 @@
 package com.tournament.fifa_tournament.controller;
 
+import com.tournament.fifa_tournament.dataTransferObjects.ClubDTO;
 import com.tournament.fifa_tournament.dataTransferObjects.PlayerDTO;
+import com.tournament.fifa_tournament.models.Club;
+import com.tournament.fifa_tournament.models.Player;
+import com.tournament.fifa_tournament.repository.ClubRepository;
+import com.tournament.fifa_tournament.service.ClubService;
 import com.tournament.fifa_tournament.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
 @Controller
 public class PlayerController {
     private PlayerService playerService;
+    private ClubService clubService;
 
     @Autowired //označenie závislostí, ktoré by mali byť automaticky vložené do beany (objektu)
-    public PlayerController(PlayerService playerService) {
+    public PlayerController(PlayerService playerService, ClubService clubService) {
         this.playerService = playerService;
+        this.clubService = clubService;
     }
 
     @GetMapping("/players")
     public String listClubs(Model model) {
         List<PlayerDTO> players = playerService.findAllPlayers();
         model.addAttribute("players", players);
+        List<ClubDTO> clubs = clubService.findAllClubs();
+        model.addAttribute("clubs", clubs);
         return "players";
     }
 
@@ -31,4 +41,16 @@ public class PlayerController {
         playerService.deletePlayer(playerID);
         return "redirect:/players";
     }
+
+    @PostMapping("/players")
+    public String savePlayer(Player player, ClubDTO clubDTO) {
+        Club clubReference = new Club();
+        clubReference.setClubID(clubDTO.getClubID());
+        player.setClub(clubReference);
+        System.out.println("Test: " + player);
+        playerService.savePlayer(player);
+        return "redirect:/players";
+    }
+
 }
+

@@ -55,7 +55,7 @@ public class LeagueTablelmpl implements LeagueTableService {
 
     @Override
     @Transactional
-    public void saveTable(LeagueTable leagueTable) {
+    public void updateTable(LeagueTable leagueTable) {
         entityManager.createQuery("UPDATE LeagueTable SET goals = :goals, points = :points WHERE rowID = :rowID")
                 .setParameter("goals", leagueTable.getGoals())
                 .setParameter("points", leagueTable.getPoints())

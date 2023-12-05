@@ -1,7 +1,10 @@
 package com.tournament.fifa_tournament.service;
 
 import com.tournament.fifa_tournament.dataTransferObjects.ClubDTO;
+import com.tournament.fifa_tournament.dataTransferObjects.LeagueTableDTO;
 import com.tournament.fifa_tournament.dataTransferObjects.PlayerDTO;
+import com.tournament.fifa_tournament.models.Club;
+import com.tournament.fifa_tournament.models.LeagueTable;
 import com.tournament.fifa_tournament.models.Player;
 import com.tournament.fifa_tournament.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +49,11 @@ public class PlayerServicelmpl implements PlayerService{
 
     public int countPlayers() {
         return (int) playerRepository.count();
+    }
+
+    @Override
+    public Player savePlayer(Player player) {
+        return playerRepository.save(player);
     }
 
 }
