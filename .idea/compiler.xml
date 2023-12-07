@@ -10,6 +10,9 @@
         <module name="fifa_tournament" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="fifa_tournament" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

@@ -3,7 +3,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-
     <title>FIFA LEAUGUE</title>
 
     <!-- <link rel="stylesheet" href="css/styles.css?v=1.0">-->
@@ -20,11 +19,17 @@
             $('#myModal').modal('show');
         });
     </script>
-    <style>
 
+    <style>
         .zapasy {
             color: white;
             text-align: center;
+        }
+
+        td {
+            background: linear-gradient(144deg, #6874E9, #794EF2);
+            color: white;
+            text-align:center;
         }
 
         form {
@@ -60,135 +65,120 @@
         #myBtn:hover {
             outline: 0;
         }
-
     </style>
-
 
 </head>
 
 <body>
-<header>
-    <img src="images/logo.jpg" alt="logo">
-</header>
-<nav>
-    <div id="menu">
-        <ul>
-            <li><a href="#" th:href="@{/index}">Home</a></li>
-            <li><a href="#" th:href="@{/clubs}">Zoznam Klubov</a></li>
-            <li><a href="#" th:href="@{/players}">Zoznam Hráčov</a></li>
-            <li><a href="#" th:href="@{/zapasy}" style="background-color:purple;">Zápasy</a></li>
-            <li><a href="#" th:href="@{/table}">Tabuľka</a></li>
-            <li><a href="#" th:href="@{/news}">Zo Sveta Futbalu</a></li>
-            <li><a href="#" th:href="@{/galery}">Galéria</a></li>
-            <li><a href="#" th:href="@{/rules}">Pravidlá</a></li>
-            <li><a style="margin-left: 810px" href="#" th:href="@{/login}">Prihlásiť</a></li>
-            <li><a style="margin-left: 10px" href="#" th:href="@{/logout}">Odhlásiť</a></li>
-        </ul>
-    </div>
-</nav>
-<main>
-    <div class="zapasy">
-        <b><h2>Zápasy</h2></b>
-        <form action="/generate" method="post">
-            <button type="submit" id="myBtn">Generovat zápasy</button>
-        </form>
-        <table>
-            <thead>
-            <tr>
-                <th>Kolo</th>
-                <th>Domáci</th>
-                <th>Výsledok</th>
-                <th>Hostia</th>
-                <th>Pridať výsledok</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="match :${matches}">
-                <td th:text="${match.round}"/>
-                <td th:text="${match.home}"/>
-                <td th:text="${match.result}"/>
-                <td th:text="${match.away}"/>
-                <td>
-                    <a href="#" data-toggle="modal" data-target="#myModal"
-                            th:attrappend="data-target=${match.matchID}">Edit
-                    </a>
-
-
-                    <!-- The edit Modal -->
-                    <div class="modal fade" id="myModal" role="dialog" th:attrappend="id=${match.matchID}">
-                        <div class="modal-dialog">
-
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="container">
-                                    <div class="row justify-content-center">
-                                        <div class="col-md-12">
-                                            <div class="wrapper">
-                                                <div class="row no-gutters">
-
-                                                    <div class="col-lg-8 col-md-7 order-md-last d-flex align-items-stretch">
-                                                        <div class="contact-wrap w-100 p-md-5 p-4">
-                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-                                    <!--Form code start from here  -->
-
-
-                                    <!-- Form Name -->
-                                    <legend>Pridať výsledok</legend>
-
-                                    <form class="form-horizontal" th:action="@{/update}"
-                                          method="POST">
-                                        <div class="row">
-
-                                            <div class="form-group">
-                                                <div class="col-md-4">
-
-                                                    <input id="matchID" path="matchID" name="matchID" type="hidden"
-                                                           placeholder="id" class="form-control input-md"
-                                                           th:value="${match.matchID}"/>
-                                                </div>
-                                            </div>
-
-
-                                            <!-- Text input-->
-                                            <div class="form-group">
-                                                <label class="col-md-4 control-label" for="result">Výsledok</label>
-                                                <div class="col-md-4">
-                                                    <input id="result" path="result" name="result"
-                                                           type="text" placeholder="Výsledok"
-                                                           class="form-control input-md" th:value="${match.result}"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <!-- Button -->
+    <header>
+        <img src="images/logo.jpg" alt="logo">
+    </header>
+    <nav>
+        <div id="menu">
+            <ul>
+                <li><a href="#" th:href="@{/index}">Home</a></li>
+                <li><a href="#" th:href="@{/clubs}">Zoznam Klubov</a></li>
+                <li><a href="#" th:href="@{/players}">Zoznam Hráčov</a></li>
+                <li><a href="#" th:href="@{/zapasy}" style="background-color:purple;">Zápasy</a></li>
+                <li><a href="#" th:href="@{/table}">Tabuľka</a></li>
+                <li><a href="#" th:href="@{/news}">Zo Sveta Futbalu</a></li>
+                <li><a href="#" th:href="@{/galery}">Galéria</a></li>
+                <li><a href="#" th:href="@{/rules}">Pravidlá</a></li>
+                <li style="float: right; padding-right: 5px;"><a href="#" th:href="@{/logout}" style="color: navajowhite">Odhlásiť</a></li>
+                <li style="float: right;"><a href="#" th:href="@{/login}" style="color: navajowhite">Prihlásiť</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <div class="zapasy">
+            <b><h2>Zápasy</h2></b>
+            <form action="/generate" method="post">
+                <button type="submit" id="myBtn">Generovat zápasy</button>
+            </form>
+            <table>
+                <thead>
+                <tr>
+                    <th>Kolo</th>
+                    <th>Domáci</th>
+                    <th>Výsledok</th>
+                    <th>Hostia</th>
+                    <th>Pridať výsledok</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="match :${matches}">
+                    <td th:text="${match.round}"/>
+                    <td th:text="${match.home}"/>
+                    <td th:text="${match.result}"/>
+                    <td th:text="${match.away}"/>
+                    <td>
+                        <a href="#" data-toggle="modal" data-target="#myModal" th:attrappend="data-target=${match.matchID}" style="color:white">Edit</a>
+                    </td>
+                        <!-- The edit Modal -->
+                        <div class="modal fade" id="myModal" role="dialog" th:attrappend="id=${match.matchID}">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="container">
+                                        <div class="row justify-content-center">
                                             <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <input type="submit" value="Pridať" id="add">
-                                                    <div class="submitting"></div>
+                                                <div class="wrapper">
+                                                    <div class="row no-gutters">
+                                                        <div class="col-lg-8 col-md-7 order-md-last d-flex align-items-stretch">
+                                                            <div class="contact-wrap w-100 p-md-5 p-4">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                                                                <!--Form code start from here  -->
+
+                                                                <!-- Form Name -->
+                                                                <legend>Pridať výsledok</legend>
+                                                                <form class="form-horizontal" th:action="@{/update}"
+                                                                      method="POST">
+                                                                    <div class="row">
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-4">
+                                                                                <input id="matchID" path="matchID" name="matchID" type="hidden"
+                                                                                       placeholder="id" class="form-control input-md"
+                                                                                       th:value="${match.matchID}"/>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <!-- Text input-->
+                                                                        <div class="form-group">
+                                                                            <label class="col-md-4 control-label" for="result">Výsledok</label>
+                                                                            <div class="col-md-4">
+                                                                                <input id="result" path="result" name="result"
+                                                                                       type="text" placeholder="Výsledok"
+                                                                                       class="form-control input-md" th:value="${match.result}"/>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!-- Button -->
+                                                                        <div class="col-md-12">
+                                                                            <div class="form-group">
+                                                                                <input type="submit" value="Pridať" id="add">
+                                                                                <div class="submitting"></div>
+                                                                            </div>
+                                                                        <div/>
+                                                                    <div/>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-
-                                        <div/>
-                                    </form>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-    </div>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</main>
-<footer>
-    <p><b>© Lukáš Šarocký - Študenský zápočtový projekt - Naposledy upravený 10.05.2021 - saroclu1@uhk.cz</b></p>
-</footer>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <footer>
+        <p><b>© Lukáš Šarocký, Jaroslav Podolák - Študenský zápočtový projekt - Naposledy upravený 10.05.2021 - saroclu1@uhk.cz, podolja1@uhk.cz</b></p>
+    </footer>
 </body>
 </html>
 

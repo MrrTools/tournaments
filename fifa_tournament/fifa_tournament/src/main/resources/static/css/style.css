@@ -479,7 +479,8 @@ pre {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   margin-right: -15px;
-  margin-left: -15px; }
+  margin-left: -15px;
+}
 
 .no-gutters {
   margin-right: 0;
@@ -1701,7 +1702,12 @@ textarea.form-control {
   height: auto; }
 
 .form-group {
-  margin-bottom: 1rem; }
+  margin-bottom: 1rem;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .form-text {
   display: block;
@@ -8285,7 +8291,8 @@ textarea.form-control {
 .contactForm .form-control {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 0; }
+  padding: 0;
+}
 
 #contactForm .error {
   color: red;
