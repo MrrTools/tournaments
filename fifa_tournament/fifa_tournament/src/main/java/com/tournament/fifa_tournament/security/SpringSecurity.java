@@ -29,10 +29,9 @@ public class SpringSecurity {
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/register/**").permitAll()
                                 .requestMatchers("/index").permitAll()
-                                .requestMatchers("/clubs").hasRole("ROLE_USER")
+                                .requestMatchers("/clubs").hasRole("ADMIN")
                                 .requestMatchers("/registration").permitAll()
-                                .requestMatchers("/css/**").permitAll()
-                                .requestMatchers("/js/**").permitAll()
+                                .requestMatchers("/resources/**").permitAll()
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")

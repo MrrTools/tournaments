@@ -2,6 +2,7 @@ package com.tournament.fifa_tournament.security;
 
 import com.tournament.fifa_tournament.models.UserClass;
 import com.tournament.fifa_tournament.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,16 +17,14 @@ import java.util.stream.Collectors;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
+    @Autowired
     private UserRepository userRepository;
 
-    public CustomUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         UserClass user = userRepository.findByUserName(userName);
-        System.out.println("Nove Score: " + user);
+
 
         if (user != null) {
 
