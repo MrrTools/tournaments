@@ -1,3 +1,30 @@
+@keyframes marqueeAnimation {
+    0% {
+        transform: translateX(100px);
+    }
+    25% {
+        transform: translateX(1300px);
+    }
+    50% {
+        transform: translateX(100px);
+    }
+    75% {
+        transform: translateX(1300px);
+    }
+    100% {
+        transform: translateX(100px);
+    }
+}
+
+.marquee-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.marquee-content {
+    white-space: nowrap;
+    animation: marqueeAnimation 50s linear infinite;
+}
 
 body {
 	   background-color:black;
