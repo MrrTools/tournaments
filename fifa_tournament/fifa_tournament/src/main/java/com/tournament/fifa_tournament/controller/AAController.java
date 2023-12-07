@@ -28,7 +28,7 @@ public class AAController {
         return "registration";
     }
 
-    @GetMapping("/logins")
+    @GetMapping("/login")
     public String loginUser(){
         return "login";
     }
