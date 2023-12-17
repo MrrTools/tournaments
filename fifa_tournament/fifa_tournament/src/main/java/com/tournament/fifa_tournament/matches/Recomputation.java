@@ -36,26 +36,15 @@ public class Recomputation {
         String[] splitscoreAway = scoreAway.split(":");
         String newScore2 = String.format("%d:%d", Integer.parseInt(splitscoreAway[0]) + awayGoals, Integer.parseInt(splitscoreAway[1]) + homeGoals);
 
-        System.out.println("Score: " + result);
-        System.out.println("Nove Score: " + newScore);
-        System.out.println("Nove Score: " + newScore2);
-
-        System.out.println("Test: " + homeGoals + awayGoals);
-
         if (homeGoals.equals(awayGoals)) {
-
             homeClubPoints = leagueTableService.findByClubClubID(clubService.findByName(match.getHome()).getClubID()).getPoints() + 1;
             awayClubPoints = leagueTableService.findByClubClubID(clubService.findByName(match.getAway()).getClubID()).getPoints() + 1;
-            System.out.println("Test: " + homeClubPoints + awayClubPoints);
         }
         else if (homeGoals.compareTo(awayGoals) > 0) {
-
             homeClubPoints = leagueTableService.findByClubClubID(clubService.findByName(match.getHome()).getClubID()).getPoints() + 3;
-            System.out.println("Test: " + homeClubPoints );
         }
         else {
             awayClubPoints = leagueTableService.findByClubClubID(clubService.findByName(match.getAway()).getClubID()).getPoints() + 3;
-            System.out.println("Test: " + awayClubPoints );
         }
 
         //zjednodusenie kodu v pripade @JsonInclude(JsonInclude.Include.NON_NULL)

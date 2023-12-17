@@ -7,8 +7,6 @@ import java.util.Optional;
 
 public interface LeagueTableRepository extends JpaRepository<LeagueTable, Integer> {
 
-    Optional<LeagueTable> findByRowID(Integer rowID);
-
     Optional<LeagueTable> findByClubClubID(Integer clubID);
 
 }

@@ -92,7 +92,7 @@
     <main>
         <div class="zapasy">
             <b><h2>Zápasy</h2></b>
-            <form action="/generate" method="post">
+            <form th:if="${userClass.role} == 'ADMIN' " action="/generate" method="post">
                 <button type="submit" id="myBtn">Generovat zápasy</button>
             </form>
             <table>
@@ -102,7 +102,7 @@
                     <th>Domáci</th>
                     <th>Výsledok</th>
                     <th>Hostia</th>
-                    <th>Pridať výsledok</th>
+                    <th th:if="${userClass.role} == 'ADMIN' ">Pridať výsledok</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -111,7 +111,7 @@
                     <td th:text="${match.home}"/>
                     <td th:text="${match.result}"/>
                     <td th:text="${match.away}"/>
-                    <td>
+                    <td th:if="${userClass.role} == 'ADMIN' ">
                         <a href="#" data-toggle="modal" data-target="#myModal" th:attrappend="data-target=${match.matchID}" style="color:white">Edit</a>
                     </td>
                         <!-- The edit Modal -->

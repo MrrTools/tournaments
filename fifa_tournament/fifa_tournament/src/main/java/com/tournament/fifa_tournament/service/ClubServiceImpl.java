@@ -5,9 +5,7 @@ import com.tournament.fifa_tournament.models.Club;
 import com.tournament.fifa_tournament.repository.ClubRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

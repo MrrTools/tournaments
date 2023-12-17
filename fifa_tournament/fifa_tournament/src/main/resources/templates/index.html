@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:security="">
 
 <head>
+    <security:intercept-url pattern="/css/**" access="permitAll" />
+    <security:intercept-url pattern="/js/**" access="permitAll" />
+    <security:intercept-url pattern="/fonts/**" access="permitAll" />
+    <security:intercept-url pattern="/images/**" access="permitAll" />
     <meta charset="utf-8">
     <title>FIFA LEAUGUE</title>
     <link rel="shortcut icon" href="/images/title_sc.jpg"/>

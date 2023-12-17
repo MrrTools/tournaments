@@ -4,9 +4,11 @@ import com.tournament.fifa_tournament.dataTransferObjects.ClubDTO;
 import com.tournament.fifa_tournament.dataTransferObjects.PlayerDTO;
 import com.tournament.fifa_tournament.models.Club;
 import com.tournament.fifa_tournament.models.Player;
-import com.tournament.fifa_tournament.repository.ClubRepository;
+import com.tournament.fifa_tournament.models.UserClass;
+import com.tournament.fifa_tournament.security.CustomUserDetailsService;
 import com.tournament.fifa_tournament.service.ClubService;
 import com.tournament.fifa_tournament.service.PlayerService;
+import com.tournament.fifa_tournament.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,15 +22,24 @@ import java.util.List;
 public class PlayerController {
     private PlayerService playerService;
     private ClubService clubService;
+    private UserService userService;
 
     @Autowired //označenie závislostí, ktoré by mali byť automaticky vložené do beany (objektu)
-    public PlayerController(PlayerService playerService, ClubService clubService) {
+    public PlayerController(PlayerService playerService, ClubService clubService, UserService userService) {
         this.playerService = playerService;
         this.clubService = clubService;
+        this.userService = userService;
     }
 
     @GetMapping("/players")
     public String listClubs(Model model) {
+        UserClass userClass = new UserClass();
+        String userName = CustomUserDetailsService.getSessionUser();
+        if(userName != null) {
+            userClass = userService.findByUserName(userName);
+            model.addAttribute("userClass", userClass);
+        }
+        model.addAttribute("userClass", userClass);
         List<PlayerDTO> players = playerService.findAllPlayers();
         model.addAttribute("players", players);
         List<ClubDTO> clubs = clubService.findAllClubs();

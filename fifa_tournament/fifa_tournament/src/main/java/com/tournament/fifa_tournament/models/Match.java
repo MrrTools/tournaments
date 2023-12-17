@@ -1,5 +1,6 @@
 package com.tournament.fifa_tournament.models;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor  // konstruktory bez atributov
 @Entity
 @Table(name = "matches", schema = "tournaments")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Match {
     private Integer round;
     @Id

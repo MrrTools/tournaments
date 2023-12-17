@@ -1,6 +1,5 @@
 package com.tournament.fifa_tournament.controller;
 
-import com.tournament.fifa_tournament.dataTransferObjects.ClubDTO;
 import com.tournament.fifa_tournament.dataTransferObjects.LeagueTableDTO;
 import com.tournament.fifa_tournament.service.ClubService;
 import com.tournament.fifa_tournament.service.LeagueTableService;

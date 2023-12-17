@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:security="">
 <head>
+    <security:intercept-url pattern="/css/**" access="permitAll" />
+    <security:intercept-url pattern="/js/**" access="permitAll" />
+    <security:intercept-url pattern="/fonts/**" access="permitAll" />
+    <security:intercept-url pattern="/images/**" access="permitAll" />
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,6 +75,7 @@
         .input-group.error input{
             border-color:rgb(206, 67, 67);
         }
+
     </style>
 </head>
 
@@ -91,7 +96,7 @@
                     id="username"
                     name="username"
                     class="form-control"
-                    placeholder="Enter email address"
+                    placeholder="Používateľské meno"
             />
         </div>
         <div class="input-group">
@@ -101,10 +106,10 @@
                     id="password"
                     name="password"
                     class="form-control"
-                    placeholder="Enter password"
+                    placeholder="Heslo"
             />
         </div>
-        <button type="submit" class="btn btn-primary" >Submit</button>
+        <button type="submit" class="btn btn-primary" >Prihlásiť</button>
     </form>
 </div>
 </body>
