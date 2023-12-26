@@ -76,6 +76,25 @@
             border-color:rgb(206, 67, 67);
         }
 
+        label {
+            color:rgba(121,32,153,1)
+        }
+
+        .registration-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px 10px;
+            color:rgba(121,32,153,1)
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .registration-link:hover {
+            color: #009aa0;
+        }
+
     </style>
 </head>
 
@@ -107,6 +126,9 @@
             />
         </div>
         <button type="submit" class="btn btn-primary" >Prihlásiť</button>
+
+        <!-- Add registration button -->
+        <a href="/registration" class="registration-link">Registrácia</a>
     </form>
 </div>
 </body>

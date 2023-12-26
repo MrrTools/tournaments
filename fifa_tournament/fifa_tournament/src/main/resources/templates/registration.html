@@ -72,6 +72,11 @@
     .input-group.error input{
     border-color:rgb(206, 67, 67);
     }
+
+    label {
+        color:rgba(121,32,153,1)
+    }
+
     </style>
 </head>
 
@@ -80,8 +85,8 @@
     <div th:if="${param.fail}" class="alert alert-success">
         Uživateľ už existuje.
     </div>
-    <form method="POST" th:action="@{/registration/save}" id="form" name="form" class="form">
-        <h1>Register</h1>
+    <form method="POST" th:action="@{/registration/save}" id="form" name="form" class="form" onsubmit="return validateForm()">
+    <h1>Registrácia</h1>
         <div class="input-group">
             <label for="userName">Používateľské meno</label>
             <input type="text" id="userName" name="userName">
@@ -93,12 +98,33 @@
             <div class="error"></div>
         </div>
         <div class="input-group">
-            <label for="cpassword">Zopakuj Heslo</label>
+            <label for="cpassword">Zopakuj heslo</label>
             <input type="password" id="cpassword" name="cpassword">
             <div class="error"></div>
         </div>
         <button type="submit">Registrovať</button>
     </form>
 </div>
+
+<script>
+    function validateForm() {
+        var password = document.getElementById("password").value;
+        var cpassword = document.getElementById("cpassword").value;
+
+        var passwordError = document.querySelector('#form .input-group:nth-child(2) .error');
+        var cpasswordError = document.querySelector('#form .input-group:nth-child(3) .error');
+
+        if (password !== cpassword) {
+            passwordError.innerHTML = "Heslá sa nezhodujú.";
+            cpasswordError.innerHTML = "Heslá sa nezhodujú.";
+            return false;
+        } else {
+            passwordError.innerHTML = "";
+            cpasswordError.innerHTML = "";
+            return true;
+        }
+    }
+</script>
+
 </body>
 </html>

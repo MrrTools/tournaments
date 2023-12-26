@@ -170,7 +170,7 @@
                                                                             <div class="form-group">
                                                                                 <label class="label edit-label" for="country">KRAJINA</label>
                                                                                 <input type="text" name="country"  id="country" path="country" placeholder="Krajina"
-                                                                                       class="form-control input-md" th:value="${club.country}">
+                                                                                       class="form-control input-md" pattern="[A-Z]{3}" title="ZADAJTE KRAJINU TROMA VEĽKÝMI PÍSMENAMI." th:value="${club.country}">
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-12">
@@ -222,7 +222,7 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label class="label" for="country">Krajina</label>
-                                                                <input type="text" name="country"  id="country" path="country" placeholder="Krajina">
+                                                                <input type="text" name="country"  id="country" path="country" placeholder="Krajina" pattern="[A-Z]{3}" title="ZADAJTE KRAJINU TROMA VEĽKÝMI PÍSMENAMI.">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12">

@@ -7,4 +7,7 @@ public interface UserService  {
     void  saveUser (RegistrationDTO registrationDTO);
 
     UserClass findByUserName(String userName);
+
+    // SOM PRIDAL
+    String getCurrentUsername();
 }

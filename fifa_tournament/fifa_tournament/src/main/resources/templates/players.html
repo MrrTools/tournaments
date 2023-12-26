@@ -91,7 +91,7 @@
     <main>
         <div class="hraci">
             <h2>Zoznam Hráčov</h2>
-            <a th:if="${userClass.role} == 'ADMIN' " type="button" id="myBtn" data-toggle="modal" data-target="#myModal">Pridať Hráča</a>
+            <a th:if="${userClass.role} == 'ADMIN' " type="button" id="myBtn" data-toggle="modal" data-target="#myModal">Pridať hráča</a>
             <table>
                 <thead>
                 <tr>
@@ -170,6 +170,7 @@
                                                                             <div class="form-group">
                                                                                 <label class="label edit-label" for="first_season">PRVÁ SEZÓNA</label>
                                                                                 <input type="text" name="first_season" id="first_season" path="first_season" placeholder="Prvá sezóna"
+                                                                                       pattern="\d+\s*/\s*\d+" title="ZADAJTE PLATNÚ SEZÓNU VO FORMÁTE rok / rok"
                                                                                        class="form-control input-md" th:value="${player.first_season}">
                                                                             </div>
                                                                         </div>
@@ -177,7 +178,7 @@
                                                                             <div class="form-group">
                                                                                 <label class="label edit-label" for="trophies_number">POČET TROFEJÍ</label>
                                                                                 <input type="text" name="trophies_number"  id="trophies_number" path="trophies_number" placeholder="Počet trofejí"
-                                                                                       class="form-control input-md" th:value="${player.trophies_number}">
+                                                                                       class="form-control input-md" pattern="[0-9]+" title="ZADJTE ČÍSLO." th:value="${player.trophies_number}">
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
@@ -253,13 +254,14 @@
                                                         <div style="text-align: left">
                                                             <div class="form-group">
                                                                 <label class="label" for="first_season">Prvá sezóna</label>
-                                                                <input type="text" name="first_season" id="first_season" path="first_season" placeholder="Prvá sezóna" style="margin-right: 10px">
+                                                                <input type="text" name="first_season" id="first_season" path="first_season" placeholder="Prvá sezóna"
+                                                                       pattern="\d+\s*/\s*\d+" title="ZADAJTE PLATNÚ SEZÓNU VO FORMÁTE rok / rok" style="margin-right: 10px">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label class="label" for="trophies_number">Počet trofejí</label>
-                                                                <input type="text" name="trophies_number"  id="trophies_number" path="trophies_number" placeholder="Počet trofejí">
+                                                                <input type="text" name="trophies_number"  id="trophies_number" path="trophies_number" placeholder="Počet trofejí" pattern="[0-9]+" title="ZADJTE ČÍSLO.">
                                                             </div>
                                                         </div>
                                                         <div class="row">

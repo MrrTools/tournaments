@@ -34,8 +34,8 @@ public class AAController {
     }
 
     @PostMapping("/registration/save")
-    public String saveUser(@Validated @ModelAttribute("registrationDTO")RegistrationDTO registrationDTO,
-                           BindingResult result, Model model){
+    public String saveUser(@Validated @ModelAttribute("registrationDTO") RegistrationDTO registrationDTO,
+                           BindingResult result, Model model) {
         UserClass existUser = userService.findByUserName(registrationDTO.getUserName());
         if(existUser != null && existUser.getUserName() != null && !existUser.getUserName().isEmpty()) {
             return "redirect:/register?fail";
@@ -47,6 +47,10 @@ public class AAController {
         }
 
         userService.saveUser(registrationDTO);
+        // SOM PRIDAL
+        String currentUsername = userService.getCurrentUsername();
+        model.addAttribute("username", currentUsername);
+
         return "redirect:/index?success";
 
     }

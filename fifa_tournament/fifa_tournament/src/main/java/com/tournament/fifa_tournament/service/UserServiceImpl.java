@@ -5,6 +5,8 @@ import com.tournament.fifa_tournament.dataTransferObjects.RegistrationDTO;
 import com.tournament.fifa_tournament.models.UserClass;
 import com.tournament.fifa_tournament.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +36,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserClass findByUserName(String username) {
         return userRepository.findByUserName(username);
+    }
+
+    // SOM PRIDAL
+    @Override
+    public String getCurrentUsername() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getName();
     }
 }
