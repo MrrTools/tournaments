@@ -19,46 +19,48 @@ public class Recomputation {
         this.leagueTableService = leagueTableService;
     }
 
-    public void tableRecomputation(Match match){
-        Integer homeClubPoints = leagueTableService.findByClubClubID(clubService.findByName(match.getHome()).getClubID()).getPoints() + 1;
-        Integer awayClubPoints = leagueTableService.findByClubClubID(clubService.findByName(match.getAway()).getClubID()).getPoints() + 1;
-
-        String result = match.getResult();
-        String[] splitResult = result.split(":");
-        Integer homeGoals = Integer.parseInt(splitResult[0]);
-        Integer awayGoals = Integer.parseInt(splitResult[1]);
-
-        String scoreHome = leagueTableService.findByClubClubID(clubService.findByName(match.getHome()).getClubID()).getGoals();
-        String[] splitscoreHome = scoreHome.split(":");
-        String newScore = String.format("%d:%d", Integer.parseInt(splitscoreHome[0]) + homeGoals, Integer.parseInt(splitscoreHome[1]) + awayGoals);
-
-        String scoreAway = leagueTableService.findByClubClubID(clubService.findByName(match.getAway()).getClubID()).getGoals();
-        String[] splitscoreAway = scoreAway.split(":");
-        String newScore2 = String.format("%d:%d", Integer.parseInt(splitscoreAway[0]) + awayGoals, Integer.parseInt(splitscoreAway[1]) + homeGoals);
-
-        if (homeGoals.equals(awayGoals)) {
-            homeClubPoints = leagueTableService.findByClubClubID(clubService.findByName(match.getHome()).getClubID()).getPoints() + 1;
-            awayClubPoints = leagueTableService.findByClubClubID(clubService.findByName(match.getAway()).getClubID()).getPoints() + 1;
-        }
-        else if (homeGoals.compareTo(awayGoals) > 0) {
-            homeClubPoints = leagueTableService.findByClubClubID(clubService.findByName(match.getHome()).getClubID()).getPoints() + 3;
-        }
-        else {
-            awayClubPoints = leagueTableService.findByClubClubID(clubService.findByName(match.getAway()).getClubID()).getPoints() + 3;
-        }
-
-        //zjednodusenie kodu v pripade @JsonInclude(JsonInclude.Include.NON_NULL)
+    private void updateTable(Match match, String team, int goalsFor, int goalsAgainst) {
         LeagueTable leagueTable = new LeagueTable();
-        leagueTable.setPoints(homeClubPoints);
+        leagueTable.setRowID(leagueTableService.findByClubClubID(clubService.findByName(team).getClubID()).getRowID());
+
+        int points = 0;
+        if (!"BYE".equals(match.getHome()) && !"BYE".equals(match.getAway())) {
+            int homeGoals = Integer.parseInt(match.getResult().split(":")[0]);
+            int awayGoals = Integer.parseInt(match.getResult().split(":")[1]);
+
+            if (team.equals(match.getHome())) {
+                if (homeGoals > awayGoals) {
+                    points = 3;
+                } else if (homeGoals == awayGoals) {
+                    points = 1;
+                }
+            } else if (team.equals(match.getAway())) {
+                if (awayGoals > homeGoals) {
+                    points = 3;
+                } else if (awayGoals == homeGoals) {
+                    points = 1;
+                }
+            }
+        }
+
+        leagueTable.setPoints(leagueTableService.findByClubClubID(clubService.findByName(team).getClubID()).getPoints() + points);
+
+        String currentScore = leagueTableService.findByClubClubID(clubService.findByName(team).getClubID()).getGoals();
+        String[] splitScore = currentScore.split(":");
+        String newScore = String.format("%d:%d", Integer.parseInt(splitScore[0]) + goalsFor, Integer.parseInt(splitScore[1]) + goalsAgainst);
         leagueTable.setGoals(newScore);
-        leagueTable.setRowID(leagueTableService.findByClubClubID(clubService.findByName(match.getHome()).getClubID()).getRowID());
-        leagueTableService.updateTable(leagueTable);
 
-        leagueTable.setPoints(awayClubPoints);
-        leagueTable.setGoals(newScore2);
-        leagueTable.setRowID(leagueTableService.findByClubClubID(clubService.findByName(match.getAway()).getClubID()).getRowID());
         leagueTableService.updateTable(leagueTable);
-
     }
 
+    public void tableRecomputation(Match match) {
+        if (!"BYE".equals(match.getHome())) {
+            updateTable(match, match.getHome(), Integer.parseInt(match.getResult().split(":")[0]), Integer.parseInt(match.getResult().split(":")[1]));
+        }
+
+        if (!"BYE".equals(match.getAway())) {
+            updateTable(match, match.getAway(), Integer.parseInt(match.getResult().split(":")[1]), Integer.parseInt(match.getResult().split(":")[0]));
+        }
+    }
 }
+

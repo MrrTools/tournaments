@@ -6,12 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f70c8da4-4746-46a4-8c11-7cfed38ed94f" name="Default Changelist" comment="Version of Jaro">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/controller/ClubController.java" beforeDir="false" afterPath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/controller/ClubController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/controller/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/controller/PlayerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/matches/Recomputation.java" beforeDir="false" afterPath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/matches/Recomputation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/service/ClubService.java" beforeDir="false" afterPath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/service/ClubService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/service/LeagueTableService.java" beforeDir="false" afterPath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/service/LeagueTableService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/service/LeagueTablelmpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/service/LeagueTablelmpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
