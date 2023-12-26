@@ -4,7 +4,6 @@ import com.tournament.fifa_tournament.dataTransferObjects.ClubDTO;
 import com.tournament.fifa_tournament.models.Club;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ClubService {
     List<ClubDTO> findAllClubs();

@@ -7,10 +7,14 @@ import java.util.List;
 
 public interface LeagueTableService {
 
+    LeagueTable createClubInTable(LeagueTable leagueTable);
+
     List<LeagueTableDTO> findAllRows();
 
     LeagueTableDTO findByClubClubID(Integer clubID);
 
     void updateTable(LeagueTable leagueTable);
+
+    void deleteClubTable(Integer clubID);
 
 }

@@ -2,9 +2,11 @@ package com.tournament.fifa_tournament.controller;
 
 import com.tournament.fifa_tournament.dataTransferObjects.ClubDTO;
 import com.tournament.fifa_tournament.models.Club;
+import com.tournament.fifa_tournament.models.LeagueTable;
 import com.tournament.fifa_tournament.models.UserClass;
 import com.tournament.fifa_tournament.security.CustomUserDetailsService;
 import com.tournament.fifa_tournament.service.ClubService;
+import com.tournament.fifa_tournament.service.LeagueTableService;
 import com.tournament.fifa_tournament.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,11 +19,13 @@ import java.util.List;
 public class ClubController {
     private ClubService clubService;
     private UserService userService;
+    private LeagueTableService leagueTableService;
 
     @Autowired //označenie závislostí, ktoré by mali byť automaticky vložené do beany (objektu)
-    public ClubController(ClubService clubService, UserService userService) {
+    public ClubController(ClubService clubService, UserService userService, LeagueTableService leagueTableService) {
         this.clubService = clubService;
         this.userService = userService;
+        this.leagueTableService = leagueTableService;
     }
 
     @GetMapping("/clubs")

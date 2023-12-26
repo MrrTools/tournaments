@@ -5,17 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f70c8da4-4746-46a4-8c11-7cfed38ed94f" name="Default Changelist" comment="Version of Jaro">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/controller/AAController.java" beforeDir="false" afterPath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/controller/AAController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/service/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/resources/templates/clubs.html" beforeDir="false" afterPath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/resources/templates/clubs.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/resources/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/resources/templates/players.html" beforeDir="false" afterPath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/resources/templates/players.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/resources/templates/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/resources/templates/registration.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/resources/templates/zapasy.html" beforeDir="false" afterPath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/resources/templates/zapasy.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/controller/ClubController.java" beforeDir="false" afterPath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/controller/ClubController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/controller/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/controller/PlayerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/matches/Recomputation.java" beforeDir="false" afterPath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/matches/Recomputation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/service/ClubService.java" beforeDir="false" afterPath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/service/ClubService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/service/LeagueTableService.java" beforeDir="false" afterPath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/service/LeagueTableService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/service/LeagueTablelmpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/fifa_tournament/fifa_tournament/src/main/java/com/tournament/fifa_tournament/service/LeagueTablelmpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,24 +33,27 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="RequestMappingsPanelOrder0" value="0" />
-    <property name="RequestMappingsPanelOrder1" value="1" />
-    <property name="RequestMappingsPanelWidth0" value="75" />
-    <property name="RequestMappingsPanelWidth1" value="75" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2885246" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "node.js.selected.package.tslint": "(autodetect)"
+  }
+}]]></component>
   <component name="RunManager" selected="Spring Boot.FifaTournamentApplication">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="FifaTournamentApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.tournament.fifa_tournament.FifaTournamentApplication" />
       <module name="fifa_tournament" />
@@ -68,13 +67,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="fifa_tournament" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="fifa_tournament" />
+      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -86,6 +87,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.FifaTournamentApplication" />
+      <item itemvalue="Spring Boot.FifaTournamentApplication" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.FifaTournamentApplication" />
@@ -145,7 +150,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Version of Jaro" />

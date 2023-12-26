@@ -1,12 +1,15 @@
 package com.tournament.fifa_tournament.controller;
 
 import com.tournament.fifa_tournament.dataTransferObjects.ClubDTO;
+import com.tournament.fifa_tournament.dataTransferObjects.LeagueTableDTO;
 import com.tournament.fifa_tournament.dataTransferObjects.PlayerDTO;
 import com.tournament.fifa_tournament.models.Club;
+import com.tournament.fifa_tournament.models.LeagueTable;
 import com.tournament.fifa_tournament.models.Player;
 import com.tournament.fifa_tournament.models.UserClass;
 import com.tournament.fifa_tournament.security.CustomUserDetailsService;
 import com.tournament.fifa_tournament.service.ClubService;
+import com.tournament.fifa_tournament.service.LeagueTableService;
 import com.tournament.fifa_tournament.service.PlayerService;
 import com.tournament.fifa_tournament.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +26,14 @@ public class PlayerController {
     private PlayerService playerService;
     private ClubService clubService;
     private UserService userService;
+    private LeagueTableService leagueTableService;
 
     @Autowired //označenie závislostí, ktoré by mali byť automaticky vložené do beany (objektu)
-    public PlayerController(PlayerService playerService, ClubService clubService, UserService userService) {
+    public PlayerController(PlayerService playerService, ClubService clubService, UserService userService, LeagueTableService leagueTableService) {
         this.playerService = playerService;
         this.clubService = clubService;
         this.userService = userService;
+        this.leagueTableService = leagueTableService;
     }
 
     @GetMapping("/players")
@@ -54,12 +59,23 @@ public class PlayerController {
     }
 
     @PostMapping("/players")
-    public String savePlayer(Player player, ClubDTO clubDTO) {
+    public String savePlayer(Player player, ClubDTO clubDTO, LeagueTable leagueTable) {
+        List<LeagueTableDTO> leagueTableDTO = leagueTableService.findAllRows();
         Club clubReference = new Club();
         clubReference.setClubID(clubDTO.getClubID());
         player.setClub(clubReference);
-        System.out.println("Test: " + player);
         playerService.savePlayer(player);
+        boolean clubExists = false;
+        for (LeagueTableDTO record : leagueTableDTO) {
+            if (clubReference != null && !clubReference.equals(record.getClub().getClubID())) {
+                clubExists = true;
+                break;
+            }
+        }
+        if (clubExists == false) {
+            leagueTable.setClub(clubReference);
+            leagueTableService.createClubInTable(leagueTable);
+        }
         return "redirect:/players";
     }
 

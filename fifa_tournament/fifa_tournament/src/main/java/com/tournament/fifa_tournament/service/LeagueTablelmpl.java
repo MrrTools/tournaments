@@ -27,6 +27,18 @@ public class LeagueTablelmpl implements LeagueTableService {
         this.leagueTableRepo = leagueTableRepo;
     }
 
+    @Override
+    public LeagueTable createClubInTable(LeagueTable leagueTable) {
+        leagueTable.setGoals("0:0");
+        leagueTable.setPoints(0);
+        return leagueTableRepo.save(leagueTable);
+    }
+
+
+    @Override
+    public void deleteClubTable(Integer clubID) {
+        leagueTableRepo.deleteById(clubID);
+    }
 
     @Override
     public List<LeagueTableDTO> findAllRows() {
