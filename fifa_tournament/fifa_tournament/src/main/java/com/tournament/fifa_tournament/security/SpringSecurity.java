@@ -35,16 +35,16 @@ public class SpringSecurity {
                         authorize
                                 .anyRequest().permitAll()
                 ).formLogin(
-                        form -> form
-                                .loginPage("/login")
-                                .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/index")
-                                .permitAll()
-                ).logout(
-                        logout -> logout
-                                .logoutSuccessUrl("/index")
-                                .permitAll()
-                );
+                form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/index")
+                        .permitAll()
+        ).logout(
+                logout -> logout
+                        .logoutSuccessUrl("/index")
+                        .permitAll()
+        );
         return http.build();
     }
 

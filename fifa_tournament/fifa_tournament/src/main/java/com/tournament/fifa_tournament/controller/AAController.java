@@ -42,14 +42,11 @@ public class AAController {
         }
 
         if(result.hasErrors()){
-          model.addAttribute("registrationDTO", registrationDTO);
-                  return "registration";
+            model.addAttribute("registrationDTO", registrationDTO);
+            return "registration";
         }
 
         userService.saveUser(registrationDTO);
-        // SOM PRIDAL
-        String currentUsername = userService.getCurrentUsername();
-        model.addAttribute("username", currentUsername);
 
         return "redirect:/index?success";
 

@@ -11,7 +11,7 @@ import java.util.List;
 
 @Component
 public class MatchGenerator {
-    
+
     private MatchService matchService;
     private PlayerService playerService;
 

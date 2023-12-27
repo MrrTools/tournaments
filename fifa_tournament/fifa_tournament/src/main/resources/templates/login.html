@@ -95,14 +95,16 @@
             color: #009aa0;
         }
 
+        .alert-danger {
+            color: red;
+            text-align: center;
+        }
+
     </style>
 </head>
 
 <body>
 <div class="container">
-    <div th:if="${param.error}">
-        <div class="alert alert-danger">Nesprávne meno alebo heslo</div>
-    </div>
     <form method="POST" th:action="@{/login}" id="form" name="form" class="form" role="form">
         <h1>Prihlásiť</h1>
         <div class="input-group">
@@ -125,6 +127,11 @@
                     placeholder="Heslo"
             />
         </div>
+
+        <div th:if="${param.error}">
+            <div class="alert alert-danger">Nesprávne meno alebo heslo</div>
+        </div>
+
         <button type="submit" class="btn btn-primary" >Prihlásiť</button>
 
         <!-- Add registration button -->

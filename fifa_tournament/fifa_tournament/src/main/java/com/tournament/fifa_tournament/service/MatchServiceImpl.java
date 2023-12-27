@@ -48,5 +48,11 @@ public class MatchServiceImpl implements MatchService {
         return mapToMatchDTO(match);
     }
 
+    @Override
+    public List<MatchDTO> findNextMatches() {
+        List<Match> matches = matchRepository.findTop5ByResultIsNullOrderByRound();
+        return matches.stream().map(match -> mapToMatchDTO(match)).collect(Collectors.toList());
+    }
+
 
 }

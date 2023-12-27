@@ -28,8 +28,14 @@
                 <li><a href="#" th:href="@{/news}">Zo Sveta Futbalu</a></li>
                 <li><a href="#" th:href="@{/galery}" style="background-color:purple;">Galéria</a></li>
                 <li><a href="#" th:href="@{/rules}">Pravidlá</a></li>
-                <li style="float: right; padding-right: 5px;"><a href="#" th:href="@{/logout}" style="color: navajowhite">Odhlásiť</a></li>
-                <li style="float: right;"><a href="#" th:href="@{/login}" style="color: navajowhite">Prihlásiť</a></li>
+                <!-- Show "Prihlásiť" only when the user is anonymous -->
+                <li style="float: right;" th:if="${username eq 'anonymousUser'}">
+                    <a href="#" th:href="@{/login}" style="color: navajowhite">Prihlásiť</a>
+                </li>
+                <!-- Show "Odhlásiť" only when the user is logged in (not anonymous) -->
+                <li style="float: right;" th:unless="${username eq 'anonymousUser'}">
+                    <a href="#" th:href="@{/logout}" style="color: navajowhite">Odhlásiť</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -62,7 +68,7 @@
         </div>
     </main>
     <footer>
-        <p><b>© Lukáš Šarocký, Jaroslav Podolák - Študenský zápočtový projekt - Naposledy upravený 10.05.2021 - saroclu1@uhk.cz, podolja1@uhk.cz</b></p>
+        <p><b>© Lukáš Šarocký, Jaroslav Podolák - Študenský zápočtový projekt - Naposledy upravený 31.12.2023 - saroclu1@uhk.cz, podolja1@uhk.cz</b></p>
     </footer>
 
 </body>

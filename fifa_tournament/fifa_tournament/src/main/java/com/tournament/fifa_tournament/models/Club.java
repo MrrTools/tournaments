@@ -26,14 +26,9 @@ public class Club {
     @CreationTimestamp
     private LocalDateTime createdDate;
 
-
-
     @OneToOne(mappedBy = "club", cascade = CascadeType.ALL)
     private LeagueTable leagueTable;
 
     @OneToMany(mappedBy = "club", cascade = CascadeType.REMOVE)
     private Set<Player> players = new HashSet<>();
-
 }
-
-

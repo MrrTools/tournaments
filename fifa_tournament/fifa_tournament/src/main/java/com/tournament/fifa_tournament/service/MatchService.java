@@ -13,4 +13,7 @@ public interface MatchService {
 
     MatchDTO findByMatchID(int matchID);
 
+    // New method to get the first 5 matches with minimum round and no result
+    List<MatchDTO> findNextMatches();
+
 }

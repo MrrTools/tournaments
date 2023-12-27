@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 @Service
 public class ClubServiceImpl implements ClubService {
 
-
     private ClubRepository clubRepository;
 
     @Autowired //označenie závislostí, ktoré by mali byť automaticky vložené do beany (objektu)
