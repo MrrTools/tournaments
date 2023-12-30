@@ -29,7 +29,7 @@ public class Player {
     @UpdateTimestamp
     private LocalDateTime updatedDate;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "clubID", nullable = false)
     private Club club;
 }

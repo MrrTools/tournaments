@@ -7,6 +7,7 @@ import com.tournament.fifa_tournament.models.UserClass;
 import com.tournament.fifa_tournament.security.CustomUserDetailsService;
 import com.tournament.fifa_tournament.service.ClubService;
 import com.tournament.fifa_tournament.service.LeagueTableService;
+import com.tournament.fifa_tournament.service.PlayerService;
 import com.tournament.fifa_tournament.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,12 +21,14 @@ public class ClubController {
     private ClubService clubService;
     private UserService userService;
     private LeagueTableService leagueTableService;
+    private PlayerService playerService;
 
     @Autowired //označenie závislostí, ktoré by mali byť automaticky vložené do beany (objektu)
-    public ClubController(ClubService clubService, UserService userService, LeagueTableService leagueTableService) {
+    public ClubController(ClubService clubService, UserService userService, LeagueTableService leagueTableService, PlayerService playerService) {
         this.clubService = clubService;
         this.userService = userService;
         this.leagueTableService = leagueTableService;
+        this.playerService = playerService;
     }
 
     @GetMapping("/clubs")
@@ -49,13 +52,15 @@ public class ClubController {
     }
 
     @GetMapping("/club/delete/{clubID}")
-    public String deleteClub(@PathVariable("clubID") Long clubID) {
+    public String deleteClub(@PathVariable("clubID") Integer clubID) {
+        //leagueTableService.deleteClubTable(clubID);
+       // playerService.deletePlayer();
         clubService.deleteClub(clubID);
         return "redirect:/clubs";
     }
 
     @GetMapping("club/update/{clubID}")
-    public String editClub(@PathVariable("clubID") long clubID, Model model) {
+    public String editClub(@PathVariable("clubID") Integer clubID, Model model) {
         ClubDTO club = clubService.findByClubID(clubID);
         model.addAttribute( "club", club);
         return "clubs";

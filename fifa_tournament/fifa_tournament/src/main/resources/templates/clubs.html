@@ -122,15 +122,17 @@
     <main>
         <div class="kluby">
             <h2>Číselník Klubov</h2>
-            <a type="button" id="myBtn" data-toggle="modal" data-target="#myModal">Pridať klub</a>
+            <div th:if="${userClass.role} == 'ADMIN' ">
+                <a type="button" id="myBtn" data-toggle="modal" data-target="#myModal">Pridať klub</a>
+            </div>
             <table>
                 <thead>
                 <tr>
                     <th>Tím</th>
                     <th>Krajina</th>
                     <th>Dátum pridania</th>
-                    <th>Zmazať</th>
-                    <th>Edit</th>
+                    <th th:if="${userClass.role} == 'ADMIN' ">Zmazať</th>
+                    <th th:if="${userClass.role} == 'ADMIN' ">Edit</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -138,10 +140,10 @@
                     <td th:text="${club.name}"/>
                     <td th:text="${club.country}"/>
                     <td th:text="${#temporals.format(club.createdDate, 'dd/MM/yyyy')}"/>
-                    <td>
+                    <td th:if="${userClass.role} == 'ADMIN' ">
                         <a th:href="@{'/club/delete/' + ${club.clubID}}" style="color:white" onclick="return confirmDelete()">Zmazať</a>
                     </td>
-                    <td>
+                    <td th:if="${userClass.role} == 'ADMIN' ">
                         <a href="#" data-toggle="modal" data-target="#editModal"
                            th:attrappend="data-target=${club.clubID}" style="color:white">Edit</a>
                     </td>

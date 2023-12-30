@@ -109,7 +109,7 @@
     <main>
         <div class="hraci">
             <h2>Zoznam Hráčov</h2>
-            <a type="button" id="myBtn" data-toggle="modal" data-target="#myModal">Pridať Hráča</a>
+            <a th:if="${userClass.role} == 'ADMIN' " type="button" id="myBtn" data-toggle="modal" data-target="#myModal">Pridať hráča</a>
             <table>
                 <thead>
                 <tr>
@@ -119,8 +119,8 @@
                     <th>Prvá Sezóna</th>
                     <th>Počet Trofejí</th>
                     <th>Dátum pridania</th>
-                    <th>Zmazať hráča</th>
-                    <th>Editovať hráča</th>
+                    <th th:if="${userClass.role} == 'ADMIN' ">Zmazať hráča</th>
+                    <th th:if="${userClass.role} == 'ADMIN' ">Editovať hráča</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -131,10 +131,10 @@
                     <td th:text="${player.first_season}"/>
                     <td th:text="${player.trophies_number}"/>
                     <td th:text="${#temporals.format(player.createdDate, 'dd/MM/yyyy')}"/>
-                    <td>
+                    <td th:if="${userClass.role} == 'ADMIN' ">
                         <a th:href="@{'/players/delete/' + ${player.playerID}}" style="color:white">Zmazať</a>
                     </td>
-                    <td>
+                    <td th:if="${userClass.role} == 'ADMIN' ">
                         <a href="#" data-toggle="modal" data-target="#editModal"
                            th:attrappend="data-target=${player.playerID}" style="color:white">Edit</a>
                     </td>

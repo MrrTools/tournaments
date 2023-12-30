@@ -19,13 +19,13 @@ public class ClubServiceImpl implements ClubService {
     }
 
     @Override
-    public ClubDTO findByClubID(long clubID) {
+    public ClubDTO findByClubID(Integer clubID) {
         Club club = clubRepository.findById(clubID).get();
         return mapToClubDTO(club);
     }
 
     @Override
-    public void deleteClub(Long clubID) {
+    public void deleteClub(Integer clubID) {
         clubRepository.deleteById(clubID);
     }
 

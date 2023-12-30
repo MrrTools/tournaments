@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -26,9 +28,12 @@ public class Club {
     @CreationTimestamp
     private LocalDateTime createdDate;
 
-    @OneToOne(mappedBy = "club", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.SET_NULL)
+    @OneToOne(mappedBy = "club", cascade = CascadeType.ALL,fetch=FetchType.EAGER)
     private LeagueTable leagueTable;
 
-    @OneToMany(mappedBy = "club", cascade = CascadeType.REMOVE)
-    private Set<Player> players = new HashSet<>();
+    @OnDelete(action = OnDeleteAction.SET_NULL)
+    @OneToOne(mappedBy = "club", cascade = CascadeType.REMOVE, fetch=FetchType.EAGER)
+    //private Set<Player> players = new HashSet<>();
+    private Player player;
 }

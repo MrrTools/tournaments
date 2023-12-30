@@ -10,9 +10,9 @@ public interface ClubService {
 
     Club saveClub(Club club);
 
-    ClubDTO findByClubID(long clubID);
+    ClubDTO findByClubID(Integer clubID);
 
     ClubDTO findByName(String name);
 
-    void deleteClub(Long clubID);
+    void deleteClub(Integer clubID);
 }
