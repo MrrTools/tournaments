@@ -37,11 +37,4 @@ public class UserServiceImpl implements UserService {
     public UserClass findByUserName(String username) {
         return userRepository.findByUserName(username);
     }
-
-    // SOM PRIDAL
-    @Override
-    public String getCurrentUsername() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication.getName();
-    }
 }

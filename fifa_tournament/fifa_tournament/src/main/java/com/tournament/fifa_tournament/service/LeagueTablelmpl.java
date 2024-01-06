@@ -53,7 +53,10 @@ public class LeagueTablelmpl implements LeagueTableService {
                 .rowID(leagueTable.getRowID())
                 .goals(leagueTable.getGoals())
                 .points(leagueTable.getPoints())
-                .club(ClubDTO.builder().name(leagueTable.getClub().getName()).build())
+                .club(ClubDTO.builder()
+                        .name(leagueTable.getClub().getName())
+                        .clubID(leagueTable.getClub().getClubID())
+                        .build())
                 .createdDate(leagueTable.getCreatedDate())
                 .updatedDate(leagueTable.getUpdatedDate())
                 .build();

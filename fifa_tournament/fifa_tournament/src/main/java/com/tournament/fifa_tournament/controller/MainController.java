@@ -1,6 +1,6 @@
 package com.tournament.fifa_tournament.controller;
-
 import com.tournament.fifa_tournament.dataTransferObjects.MatchDTO;
+import com.tournament.fifa_tournament.security.CustomUserDetailsService;
 import com.tournament.fifa_tournament.service.MatchService;
 import com.tournament.fifa_tournament.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +24,8 @@ public class MainController {
 
     @GetMapping("/index")
     public String index(Model model) {
-        String currentUsername = userService.getCurrentUsername();
-        model.addAttribute("username", currentUsername);
-
+        String userName = CustomUserDetailsService.getSessionUser();
+        model.addAttribute("username", userName);
         // Fetch the next matches
         List<MatchDTO> nextMatches = matchService.findNextMatches();
         model.addAttribute("nextMatches", nextMatches);
@@ -35,17 +34,23 @@ public class MainController {
     }
 
     @GetMapping("/rules")
-    public String rules() {
+    public String rules(Model model) {
+        String userName = CustomUserDetailsService.getSessionUser();
+        model.addAttribute("username", userName);
         return "rules";
     }
 
     @GetMapping("/galery")
-    public String galery() {
+    public String galery(Model model) {
+        String userName = CustomUserDetailsService.getSessionUser();
+        model.addAttribute("username", userName);
         return "galery";
     }
 
     @GetMapping("/news")
-    public String news() {
+    public String news(Model model) {
+        String userName = CustomUserDetailsService.getSessionUser();
+        model.addAttribute("username", userName);
         return "news";
     }
 }

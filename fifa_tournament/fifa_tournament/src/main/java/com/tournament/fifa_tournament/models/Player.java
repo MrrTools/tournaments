@@ -29,7 +29,7 @@ public class Player {
     @UpdateTimestamp
     private LocalDateTime updatedDate;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "clubID", nullable = false)
     private Club club;
 }

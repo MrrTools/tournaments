@@ -128,11 +128,11 @@
                 <li><a href="#" th:href="@{/galery}">Galéria</a></li>
                 <li><a href="#" th:href="@{/rules}">Pravidlá</a></li>
                 <!-- Show "Prihlásiť" only when the user is anonymous -->
-                <li style="float: right;" th:if="${username eq 'anonymousUser'}">
+                <li style="float: right;" th:if="${userClass.userName == null}">
                     <a href="#" th:href="@{/login}" style="color: navajowhite">Prihlásiť</a>
                 </li>
                 <!-- Show "Odhlásiť" only when the user is logged in (not anonymous) -->
-                <li style="float: right;" th:unless="${username eq 'anonymousUser'}">
+                <li style="float: right;" th:unless="${userClass.userName == null}">
                     <a href="#" th:href="@{/logout}" style="color: navajowhite">Odhlásiť</a>
                 </li>
             </ul>
@@ -160,7 +160,7 @@
                     <td th:text="${match.home}"/>
                     <td th:text="${match.result}"/>
                     <td th:text="${match.away}"/>
-                    <td th:if="${userClass.role} == 'ADMIN' ">
+                    <td th:if="${userClass.role == 'ADMIN' AND match.result == null}">
                         <a href="#" data-toggle="modal" data-target="#myModal" th:attrappend="data-target=${match.matchID}" style="color:white">Edit</a>
                     </td>
                         <!-- The edit Modal -->

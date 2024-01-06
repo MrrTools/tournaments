@@ -24,7 +24,6 @@ public class Recomputation {
         leagueTable.setRowID(leagueTableService.findByClubClubID(clubService.findByName(team).getClubID()).getRowID());
 
         int points = 0;
-        if (!"BYE".equals(match.getHome()) && !"BYE".equals(match.getAway())) {
             int homeGoals = Integer.parseInt(match.getResult().split(":")[0]);
             int awayGoals = Integer.parseInt(match.getResult().split(":")[1]);
 
@@ -41,7 +40,6 @@ public class Recomputation {
                     points = 1;
                 }
             }
-        }
 
         leagueTable.setPoints(leagueTableService.findByClubClubID(clubService.findByName(team).getClubID()).getPoints() + points);
 

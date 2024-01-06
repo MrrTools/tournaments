@@ -40,7 +40,7 @@ public class PlayerController {
     public String listClubs(Model model) {
         UserClass userClass = new UserClass();
         String userName = CustomUserDetailsService.getSessionUser();
-        if(userName != null) {
+        if (userName != null) {
             userClass = userService.findByUserName(userName);
             model.addAttribute("userClass", userClass);
         }
@@ -67,7 +67,7 @@ public class PlayerController {
         playerService.savePlayer(player);
         boolean clubExists = false;
         for (LeagueTableDTO record : leagueTableDTO) {
-            if (clubReference != null && !clubReference.equals(record.getClub().getClubID())) {
+            if (clubReference != null && clubReference.getClubID().equals(record.getClub().getClubID())) {
                 clubExists = true;
                 break;
             }

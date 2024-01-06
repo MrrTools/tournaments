@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import java.util.List;
 
 @Controller
@@ -41,7 +42,7 @@ public class MatchesController {
     public String listMatches(Model model) {
         UserClass userClass = new UserClass();
         String userName = CustomUserDetailsService.getSessionUser();
-        if(userName != null) {
+        if (userName != null) {
             userClass = userService.findByUserName(userName);
             model.addAttribute("userClass", userClass);
         }
@@ -51,7 +52,7 @@ public class MatchesController {
         return "zapasy";
     }
 
-    @PostMapping( "/update")
+    @PostMapping("/update")
     public String editMatch(Match match) {
         match.setHome(matchService.findByMatchID(match.getMatchID()).getHome());
         match.setAway(matchService.findByMatchID(match.getMatchID()).getAway());

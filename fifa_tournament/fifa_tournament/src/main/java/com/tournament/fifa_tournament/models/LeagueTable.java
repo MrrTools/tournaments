@@ -30,7 +30,7 @@ public class LeagueTable {
     private LocalDateTime updatedDate;
 
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "clubID", nullable = false)
     private Club club;
 
