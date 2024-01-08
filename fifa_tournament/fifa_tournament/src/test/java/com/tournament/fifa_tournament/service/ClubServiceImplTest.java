@@ -114,6 +114,7 @@ class ClubServiceImplTest {
         assertEquals("Eng", result.get(1).getCountry());
         assertEquals(date, result.get(1).getCreatedDate());
 
+
         verify(clubRepository, times(1)).findAll();
     }
 

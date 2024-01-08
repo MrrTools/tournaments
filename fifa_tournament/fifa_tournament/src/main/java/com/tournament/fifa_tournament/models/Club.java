@@ -28,12 +28,12 @@ public class Club {
     @CreationTimestamp
     private LocalDateTime createdDate;
 
-    @OnDelete(action = OnDeleteAction.SET_NULL)
-    @OneToOne(mappedBy = "club",fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToOne(mappedBy = "club", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private LeagueTable leagueTable;
 
     @OnDelete(action = OnDeleteAction.SET_NULL)
-    @OneToOne(mappedBy = "club", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "club", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     //private Set<Player> players = new HashSet<>();
     private Player player;
 

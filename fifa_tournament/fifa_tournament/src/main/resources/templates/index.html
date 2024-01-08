@@ -64,9 +64,9 @@
         <div class="marquee-container">
             <div class="marquee-content">
                 <!-- Check if the user is anonymous -->
-                <h1 th:if="${username eq 'anonymousUser'}">FIFA21 LEAGUE</h1>
+                <h1 th:if="${username == null}">FIFA21 LEAGUE</h1>
                 <!-- Display welcome message when the user is not anonymous -->
-                <h1 th:unless="${username eq 'anonymousUser'}" th:utext="'Vitaj ' + ${username} + ' na FIFA21 LEAGUE'"></h1>
+                <h1 th:unless="${username == null}" th:utext="'Vitaj ' + ${username} + ' na FIFA21 LEAGUE'"></h1>
             </div>
         </div>
     </div>
